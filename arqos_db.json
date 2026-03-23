@@ -556,6 +556,58 @@
       "notes": [],
       "goals": 25000,
       "reconnectTips": []
+    },
+    {
+      "id": "c1774271306985",
+      "name": "CarlosX",
+      "role": "Quo",
+      "sector": "Musica",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 10000,
+      "color": "rgb(124, 92, 252)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742713069860",
+          "text": "Organizar Promo más de cerca",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
+        },
+        {
+          "id": "s17742713069861",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742713069862",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742713069863",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742713069864",
+          "text": "Fiesta Quo",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-04-18"
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 10000,
+      "reconnectTips": []
     }
   ],
   "events": [
@@ -873,6 +925,26 @@
       "contact": "c1774262383251",
       "type": "task",
       "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774271315491",
+      "title": "[CarlosX] Paso 1: Organizar Promo más de cerca",
+      "date": "2026-03-24",
+      "time": "10:00",
+      "contact": "c1774271306985",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774271319808",
+      "title": "[CarlosX] Paso 5: Fiesta Quo",
+      "date": "2026-04-18",
+      "time": "10:00",
+      "contact": "c1774271306985",
+      "type": "task",
+      "stepIdx": 4,
       "isStepSchedule": true
     }
   ]
