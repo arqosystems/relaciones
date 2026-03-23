@@ -493,6 +493,57 @@
       "notes": [],
       "goals": 25000,
       "reconnectTips": []
+    },
+    {
+      "id": "c1774266395652",
+      "name": "VictorS",
+      "role": "Doula",
+      "sector": "Musica",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 20000,
+      "color": "rgb(52, 211, 153)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742663956530",
+          "text": "Primer contacto",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-26"
+        },
+        {
+          "id": "s17742663956531",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742663956532",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742663956533",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742663956534",
+          "text": "Tocar en el congreso",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 20000,
+      "reconnectTips": []
     }
   ],
   "events": [
@@ -662,6 +713,16 @@
       "date": "2026-03-24",
       "time": "10:00",
       "contact": "c1774264313038",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774266412600",
+      "title": "[VictorS] Paso 1: Primer contacto",
+      "date": "2026-03-26",
+      "time": "10:00",
+      "contact": "c1774266395652",
       "type": "task",
       "stepIdx": 0,
       "isStepSchedule": true
