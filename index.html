@@ -566,8 +566,10 @@ table.ctable td:last-child{text-align:right}
 
 <!-- MODAL EDITAR CONTACTO -->
 <div class="overlay" id="modalEdit">
-  <div class="modal">
+  <div class="modal" style="max-width:600px">
     <h3>Editar Contacto <button onclick="closeModal('modalEdit')">×</button></h3>
+
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px">Datos generales</div>
     <div class="form-grid">
       <div class="form-row">
         <label class="form-label">Nombre</label>
@@ -614,14 +616,74 @@ table.ctable td:last-child{text-align:right}
         <input class="form-input" type="number" id="e-remind" />
       </div>
     </div>
-    <div class="form-row">
-      <label class="form-label">Editar pasos de la meta</label>
-      <div class="step-editor" id="editStepEditor"></div>
+
+    <div style="border-top:1px solid var(--border);margin:14px 0 12px"></div>
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px">5 pasos hacia la meta</div>
+    <div class="step-editor" id="editStepEditor"></div>
+
+    <div style="border-top:1px solid var(--border);margin:14px 0 12px"></div>
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
+      Anotaciones y notas
+      <button class="add-btn-sm" onclick="addEditNote()">+ Agregar nota</button>
     </div>
+    <div id="editNotesList" style="margin-bottom:10px"></div>
+    <div id="editNoteForm" style="display:none;background:var(--bg3);border-radius:var(--r);padding:10px;border:1px solid var(--border);margin-bottom:10px">
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">Fecha</label>
+          <input class="form-input" type="date" id="e-note-date" />
+        </div>
+        <div class="form-row" style="grid-column:1/-1">
+          <label class="form-label">Nota</label>
+          <textarea class="form-input" id="e-note-text" rows="2" placeholder="Qué debo hacer, qué pasó..."></textarea>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <button class="btn sm" onclick="document.getElementById('editNoteForm').style.display='none'">Cancelar</button>
+        <button class="btn primary sm" onclick="saveEditNote()">Guardar nota</button>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);margin:14px 0 12px"></div>
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
+      Programar en calendario
+      <button class="add-btn-sm" onclick="addEditCalEvent()">+ Agregar evento</button>
+    </div>
+    <div id="editCalForm" style="display:none;background:var(--bg3);border-radius:var(--r);padding:10px;border:1px solid var(--border);margin-bottom:10px">
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">Título</label>
+          <input class="form-input" id="e-cal-title" placeholder="Llamar, enviar propuesta..." />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Tipo</label>
+          <select class="form-input" id="e-cal-type">
+            <option value="task">Tarea</option>
+            <option value="msg">Mensaje/WhatsApp</option>
+            <option value="reminder">Recordatorio</option>
+            <option value="note">Nota</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Fecha</label>
+          <input class="form-input" type="date" id="e-cal-date" />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Hora</label>
+          <input class="form-input" type="time" id="e-cal-time" value="10:00" />
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <button class="btn sm" onclick="document.getElementById('editCalForm').style.display='none'">Cancelar</button>
+        <button class="btn primary sm" onclick="saveEditCalEvent()">Agendar</button>
+      </div>
+    </div>
+    <div id="editCalList" style="margin-bottom:8px"></div>
+
     <div class="modal-actions">
-      <button class="btn danger" onclick="deleteContact()">🗑 Eliminar contacto</button>
+      <button class="btn danger" onclick="deleteContact()">🗑 Eliminar</button>
       <button class="btn" onclick="closeModal('modalEdit')">Cancelar</button>
-      <button class="btn primary" onclick="updateContact()">Guardar</button>
+      <button class="btn primary" onclick="updateContact()">Guardar cambios</button>
     </div>
   </div>
 </div>
@@ -840,6 +902,13 @@ function openModal(id,data){
         <input class="form-input step-inp-e" value="${s.text}" placeholder="Paso ${i+1}" ${s.done?'style="text-decoration:line-through;color:var(--text3)"':''} />
       </div>`
     ).join('');
+    // render notes and calendar events
+    setTimeout(()=>{
+      renderEditNotes(c);
+      renderEditCalEvents(c);
+      document.getElementById('editNoteForm').style.display='none';
+      document.getElementById('editCalForm').style.display='none';
+    },50);
   }
   document.getElementById(id).classList.add('on');
 }
@@ -1369,6 +1438,100 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderContacts();
   calSelectedDay=todayStr();
   document.querySelectorAll('.overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('on');});});
+
+// ==================== EDIT MODAL - NOTES & CALENDAR ====================
+function addEditNote(){
+  document.getElementById('editNoteForm').style.display='block';
+  document.getElementById('e-note-date').value=todayStr();
+  document.getElementById('e-note-text').value='';
+}
+
+function saveEditNote(){
+  const text=document.getElementById('e-note-text').value.trim();
+  if(!text)return;
+  const date=document.getElementById('e-note-date').value;
+  const c=DB.contacts.find(x=>x.id===currentEditId);
+  if(!c)return;
+  c.notes.unshift({date,text});
+  saveData();
+  document.getElementById('editNoteForm').style.display='none';
+  renderEditNotes(c);
+}
+
+function renderEditNotes(c){
+  const el=document.getElementById('editNotesList');
+  if(!el)return;
+  if(!c.notes||!c.notes.length){
+    el.innerHTML='<div style="color:var(--text3);font-size:11px;padding:4px 0">Sin notas todavía</div>';
+    return;
+  }
+  el.innerHTML=c.notes.slice(0,6).map((n,i)=>`
+    <div style="background:var(--bg3);border-radius:var(--r);padding:8px 10px;margin-bottom:6px;border:1px solid var(--border);display:flex;gap:8px;align-items:flex-start">
+      <div style="flex:1">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:3px">${n.date}</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">${n.text}</div>
+      </div>
+      <button class="btn sm danger" onclick="deleteEditNote(${i})" style="font-size:10px;padding:2px 6px">×</button>
+    </div>`).join('');
+}
+
+function deleteEditNote(idx){
+  const c=DB.contacts.find(x=>x.id===currentEditId);
+  if(!c)return;
+  c.notes.splice(idx,1);
+  saveData();
+  renderEditNotes(c);
+}
+
+function addEditCalEvent(){
+  document.getElementById('editCalForm').style.display='block';
+  document.getElementById('e-cal-date').value=futureDate(7);
+  document.getElementById('e-cal-title').value='';
+}
+
+function saveEditCalEvent(){
+  const title=document.getElementById('e-cal-title').value.trim();
+  if(!title)return;
+  const c=DB.contacts.find(x=>x.id===currentEditId);
+  if(!c)return;
+  DB.events.push({
+    id:'e'+Date.now(),
+    title,
+    date:document.getElementById('e-cal-date').value,
+    time:document.getElementById('e-cal-time').value,
+    contact:c.id,
+    type:document.getElementById('e-cal-type').value
+  });
+  saveData();
+  document.getElementById('editCalForm').style.display='none';
+  renderEditCalEvents(c);
+}
+
+function renderEditCalEvents(c){
+  const el=document.getElementById('editCalList');
+  if(!el)return;
+  const events=DB.events.filter(e=>e.contact===c.id).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,6);
+  if(!events.length){
+    el.innerHTML='<div style="color:var(--text3);font-size:11px;padding:4px 0">Sin eventos programados</div>';
+    return;
+  }
+  el.innerHTML=events.map(e=>`
+    <div style="background:var(--bg3);border-left:3px solid ${e.type==='task'?'var(--accent)':e.type==='msg'?'var(--green)':e.type==='reminder'?'var(--pink)':'var(--amber)'};border-radius:0 var(--r) var(--r) 0;padding:7px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px">
+      <div style="flex:1">
+        <div style="font-size:12px;font-weight:500">${e.title}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px">${e.date} ${e.time||''}</div>
+      </div>
+      <button class="btn sm danger" onclick="deleteEditCalEvent('${e.id}')" style="font-size:10px;padding:2px 6px">×</button>
+    </div>`).join('');
+}
+
+function deleteEditCalEvent(id){
+  DB.events=DB.events.filter(e=>e.id!==id);
+  saveData();
+  const c=DB.contacts.find(x=>x.id===currentEditId);
+  if(c) renderEditCalEvents(c);
+}
+
 });
 
 // ==================== TOAST ====================
