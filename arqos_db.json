@@ -658,6 +658,256 @@
       "notes": [],
       "goals": 10000,
       "reconnectTips": []
+    },
+    {
+      "id": "c1774271488162",
+      "name": "Ale",
+      "role": "Productora",
+      "sector": "Audio",
+      "category": "cat1",
+      "activity": "",
+      "status": "new",
+      "money": 0,
+      "color": "rgb(251, 146, 60)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742714881620",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714881621",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714881622",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714881623",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714881624",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774271564971",
+      "name": "Jamy Caruso",
+      "role": "",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 0,
+      "color": "rgb(245, 158, 11)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742715649710",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715649711",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715649712",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715649713",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715649714",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774271572944",
+      "name": "Alex Rojas",
+      "role": "",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 0,
+      "color": "rgb(34, 197, 94)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742715729440",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715729441",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715729442",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715729443",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715729444",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774271591177",
+      "name": "Kettie",
+      "role": "",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 0,
+      "color": "rgb(167, 139, 250)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742715911770",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715911771",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715911772",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715911773",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742715911774",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774271631055",
+      "name": "Manuel M",
+      "role": "Manu",
+      "sector": "Musica",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 0,
+      "color": "rgb(52, 211, 153)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742716310550",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742716310551",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742716310552",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742716310553",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742716310554",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": []
     }
   ],
   "events": [
