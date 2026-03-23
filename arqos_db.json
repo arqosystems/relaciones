@@ -449,6 +449,56 @@
       "notes": [],
       "goals": 20000,
       "reconnectTips": []
+    },
+    {
+      "id": "c1774270669681",
+      "name": "VictorS",
+      "role": "Doula",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 20000,
+      "color": "rgb(251, 146, 60)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742706696810",
+          "text": "Primer Contacto",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742706696811",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742706696812",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742706696813",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742706696814",
+          "text": "Tocar en su congreso",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 20000,
+      "reconnectTips": []
     }
   ],
   "events": [
