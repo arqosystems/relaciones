@@ -339,9 +339,9 @@
     },
     {
       "id": "c1774264178706",
-      "name": "Booker Kinshasa",
-      "role": "",
-      "sector": "",
+      "name": "Rojan",
+      "role": "Kinshasa",
+      "sector": "Musica",
       "category": "",
       "activity": "",
       "status": "new",
@@ -390,8 +390,8 @@
     {
       "id": "c1774264313038",
       "name": "Fano",
-      "role": "",
-      "sector": "",
+      "role": "SunDance",
+      "sector": "Musica",
       "category": "",
       "activity": "",
       "status": "new",
@@ -405,23 +405,24 @@
           "id": "s17742643130380",
           "text": "Fecha apartada",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
         },
         {
           "id": "s17742643130381",
-          "text": "Segundo Contacto",
+          "text": "Enviar Stems",
           "done": false,
           "doneDate": null
         },
         {
           "id": "s17742643130382",
-          "text": "Seguimiento y ajuste de detalles",
+          "text": "?",
           "done": false,
           "doneDate": null
         },
         {
           "id": "s17742643130383",
-          "text": "Negociación y cierre",
+          "text": "?",
           "done": false,
           "doneDate": null
         },
@@ -653,6 +654,16 @@
       "contact": "c1774264613857",
       "type": "task",
       "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265504015",
+      "title": "[Fano] Paso 1: Fecha apartada",
+      "date": "2026-03-24",
+      "time": "10:00",
+      "contact": "c1774264313038",
+      "type": "task",
+      "stepIdx": 0,
       "isStepSchedule": true
     }
   ]
