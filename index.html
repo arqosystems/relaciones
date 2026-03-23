@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arqos — Mapa de Relaciones</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09090f;--bg2:#0f1019;--bg3:#141622;--bg4:#1a1e2e;--bg5:#1f2438;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--border3:rgba(255,255,255,0.22);
+  --text:#dde2f0;--text2:#7a83a6;--text3:#424a66;
+  --accent:#4f7fff;--accent2:#7c5cfc;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--teal:#06b6d4;--pink:#ec4899;
+  --font:'Syne',sans-serif;--mono:'DM Mono',monospace;--r:8px;--r2:14px;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* TOPBAR */
+.topbar{height:50px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0;flex-shrink:0;padding:0 16px}
+.brand{font-family:var(--font);font-size:17px;font-weight:800;letter-spacing:-0.5px;color:var(--text);margin-right:20px;white-space:nowrap}
+.brand em{color:var(--accent);font-style:normal}
+.tabs{display:flex;gap:2px;flex:1}
+.tab{padding:6px 13px;border-radius:6px;cursor:pointer;font-size:11.5px;color:var(--text2);transition:all .15s;white-space:nowrap;letter-spacing:0.3px;border:none;background:none;font-family:var(--mono)}
+.tab:hover{background:var(--bg3);color:var(--text)}
+.tab.on{background:var(--bg4);color:var(--accent);border:1px solid var(--border2)}
+.topbar-actions{display:flex;gap:8px;margin-left:auto}
+.btn{padding:6px 12px;border-radius:6px;cursor:pointer;font-size:11.5px;font-family:var(--mono);transition:all .15s;border:1px solid var(--border2);background:transparent;color:var(--text2)}
+.btn:hover{background:var(--bg3);color:var(--text)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{background:#3a6be8}
+.btn.danger{color:var(--red);border-color:rgba(239,68,68,0.3)}
+.btn.danger:hover{background:rgba(239,68,68,0.1)}
+.btn.sm{padding:4px 9px;font-size:11px}
+
+/* VIEWS */
+.view{display:none;flex:1;overflow:hidden}
+.view.on{display:flex}
+
+/* ====== CONTACTS VIEW ====== */
+#vContacts{flex-direction:column}
+.ctbar{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;background:var(--bg2);flex-shrink:0;flex-wrap:wrap}
+.search{flex:1;min-width:140px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none}
+.search:focus{border-color:var(--accent)}
+.filter-pill{padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:11px;cursor:pointer;font-family:var(--mono);white-space:nowrap}
+.filter-pill.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.group-select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:5px 8px;color:var(--text2);font-family:var(--mono);font-size:11.5px;outline:none;cursor:pointer}
+.group-select:focus{border-color:var(--accent)}
+
+.ctmain{display:grid;grid-template-columns:1fr 380px;flex:1;overflow:hidden;min-height:0}
+.ct-list{overflow-y:auto;padding:12px 16px}
+.ct-panel{border-left:1px solid var(--border);overflow-y:auto;background:var(--bg2)}
+
+/* GROUP HEADER */
+.group-header{display:flex;align-items:center;gap:10px;padding:10px 6px 6px;margin-top:8px;border-bottom:1px solid var(--border)}
+.group-header:first-child{margin-top:0}
+.group-name{font-family:var(--font);font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+.group-badge{padding:2px 8px;border-radius:10px;font-size:10px;background:var(--bg4);color:var(--text3)}
+.group-range{font-size:10px;color:var(--teal);margin-left:auto}
+
+/* TABLE */
+table.ctable{width:100%;border-collapse:collapse}
+table.ctable th{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:7px 10px;text-align:left;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:2}
+table.ctable td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+table.ctable tr.ct-row{cursor:pointer}
+table.ctable tr.ct-row:hover td{background:var(--bg3)}
+table.ctable tr.ct-row.sel td{background:var(--bg4)}
+table.ctable td:last-child{text-align:right}
+
+/* STEP DOTS (5-step progress in table) */
+.step-dots{display:flex;gap:4px;align-items:center}
+.step-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--border2);background:transparent;transition:all .2s;cursor:pointer;flex-shrink:0}
+.step-dot.done{background:var(--green);border-color:var(--green)}
+.step-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 2px rgba(79,127,255,0.25)}
+.step-label{font-size:9px;color:var(--text3);margin-left:2px;white-space:nowrap}
+
+.avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.ct-name-cell{display:flex;align-items:center;gap:8px}
+.ct-name{font-weight:500;color:var(--text)}
+.ct-role{font-size:11px;color:var(--text3)}
+.badge{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500}
+.status-hot{background:rgba(239,68,68,0.15);color:#f87171}
+.status-warm{background:rgba(245,158,11,0.15);color:#fbbf24}
+.status-cold{background:rgba(99,102,241,0.15);color:#818cf8}
+.status-new{background:rgba(34,197,94,0.15);color:#4ade80}
+.status-inactive{background:rgba(107,114,128,0.2);color:#9ca3af}
+.money-green{color:var(--green);font-family:var(--font);font-weight:700}
+.money-amber{color:var(--amber);font-family:var(--font);font-weight:700}
+.total-row td{border-top:2px solid var(--border2);font-weight:700;color:var(--text);font-size:14px;padding-top:12px}
+
+/* PANEL CONTACTO */
+.panel-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--text3);gap:8px;font-size:12px}
+.panel-header{padding:16px;border-bottom:1px solid var(--border)}
+.panel-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.panel-name{font-family:var(--font);font-size:16px;font-weight:700;margin-top:10px}
+.panel-role{color:var(--text2);font-size:12px;margin-top:2px}
+.panel-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{padding:3px 9px;border-radius:12px;font-size:10.5px;border:1px solid var(--border2);color:var(--text2);cursor:pointer}
+.tag:hover{border-color:var(--accent);color:var(--accent)}
+.panel-section{padding:14px 16px;border-bottom:1px solid var(--border)}
+.panel-section-title{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+
+/* 5-STEP JOURNEY IN PANEL */
+.journey{display:flex;flex-direction:column;gap:0}
+.journey-step{display:flex;gap:10px;position:relative;padding-bottom:12px}
+.journey-step:last-child{padding-bottom:0}
+.journey-left{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0}
+.journey-circle{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid var(--border2);color:var(--text3);background:var(--bg3);flex-shrink:0;cursor:pointer;transition:all .2s;z-index:1}
+.journey-circle.done{background:var(--green);border-color:var(--green);color:#fff}
+.journey-circle.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 3px rgba(79,127,255,0.2)}
+.journey-line{width:2px;flex:1;background:var(--border);margin-top:4px;min-height:12px}
+.journey-line.done{background:var(--green)}
+.journey-content{flex:1;padding-top:3px}
+.journey-title{font-size:12px;font-weight:500;color:var(--text);line-height:1.4}
+.journey-title.done{text-decoration:line-through;color:var(--text3)}
+.journey-meta{font-size:10px;color:var(--text3);margin-top:2px}
+.journey-actions{display:flex;gap:4px;margin-top:5px}
+
+.money-projection{background:var(--bg3);border-radius:var(--r2);padding:12px;border:1px solid var(--border)}
+.money-amount{font-family:var(--font);font-size:22px;font-weight:800;color:var(--green)}
+.money-label{font-size:11px;color:var(--text3);margin-top:2px}
+.progress-wrap{margin-top:10px}
+.progress-bar{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-top:4px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .3s}
+.progress-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text3)}
+
+.note-item{background:var(--bg3);border-radius:var(--r);padding:9px;margin-bottom:8px;border:1px solid var(--border)}
+.note-date{font-size:10px;color:var(--text3);margin-bottom:4px}
+.note-text{line-height:1.5;color:var(--text2)}
+.reconnect-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--r2);padding:12px}
+.reconnect-box h4{color:#f87171;font-size:12px;margin-bottom:6px}
+.reconnect-step{display:flex;align-items:flex-start;gap:6px;padding:4px 0;color:var(--text2);font-size:11.5px;line-height:1.5}
+.add-btn-sm{padding:3px 9px;border-radius:5px;font-size:10.5px;font-family:var(--mono);cursor:pointer;border:1px dashed var(--border2);background:transparent;color:var(--text3)}
+.add-btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.notify-toggle{display:flex;align-items:center;gap:8px;padding:8px 0}
+.toggle-sw{width:32px;height:18px;border-radius:9px;border:1px solid var(--border2);cursor:pointer;position:relative;transition:.2s;flex-shrink:0}
+.toggle-sw.on{background:var(--accent);border-color:var(--accent)}
+.toggle-sw::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:var(--text3);top:2px;left:2px;transition:.2s}
+.toggle-sw.on::after{left:16px;background:#fff}
+
+/* ====== CALENDAR VIEW ====== */
+#vCalendar{flex-direction:column}
+.cal-header{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg2);flex-shrink:0}
+.cal-nav{display:flex;align-items:center;gap:8px}
+.cal-nav button{background:none;border:1px solid var(--border2);color:var(--text2);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.cal-nav button:hover{background:var(--bg3);color:var(--text)}
+.cal-month-name{font-family:var(--font);font-size:16px;font-weight:700;min-width:160px}
+.cal-body{display:grid;grid-template-columns:1fr 280px;flex:1;overflow:hidden;min-height:0}
+.cal-grid-wrap{overflow-y:auto;padding:16px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border)}
+.cal-day-name{background:var(--bg);padding:8px;text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text3)}
+.cal-cell{background:var(--bg2);padding:8px;min-height:80px;cursor:pointer;transition:background .1s;position:relative}
+.cal-cell:hover{background:var(--bg3)}
+.cal-cell.today{background:var(--bg4)}
+.cal-cell.today .cal-num{color:var(--accent);font-weight:700}
+.cal-cell.other-month{opacity:0.35}
+.cal-num{font-size:11.5px;color:var(--text2);margin-bottom:4px}
+.cal-event{padding:2px 5px;border-radius:3px;font-size:10px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.ev-task{background:rgba(79,127,255,0.2);color:#93b4ff}
+.ev-msg{background:rgba(34,197,94,0.2);color:#86efac}
+.ev-note{background:rgba(245,158,11,0.2);color:#fcd34d}
+.ev-reminder{background:rgba(236,72,153,0.2);color:#f9a8d4}
+.cal-sidebar{border-left:1px solid var(--border);overflow-y:auto;padding:16px;background:var(--bg2)}
+.cal-side-date{font-family:var(--font);font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.cal-side-empty{color:var(--text3);font-size:12px;padding:8px 0}
+.cal-event-full{background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:9px 10px;margin-bottom:8px}
+.cal-event-full .ev-title{font-size:12px;font-weight:500;margin-bottom:3px}
+.cal-event-full .ev-contact{font-size:10.5px;color:var(--text3)}
+.cal-event-full .ev-time{font-size:10px;color:var(--accent);margin-top:4px}
+
+/* ====== TIMELINE VIEW ====== */
+#vTimeline{flex-direction:column}
+.tl-header{padding:12px 20px;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0;display:flex;align-items:center;gap:16px}
+.tl-body{flex:1;overflow-y:auto;padding:20px}
+.tl-months{display:flex;flex-direction:column;gap:24px}
+.tl-month{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+.tl-month-header{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.tl-month-name{font-family:var(--font);font-weight:700;font-size:14px}
+.tl-month-money{font-family:var(--font);font-weight:700;font-size:14px;color:var(--green)}
+.tl-rows{padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.tl-row{display:grid;grid-template-columns:140px 1fr auto;gap:12px;align-items:start}
+.tl-ct-name{font-size:12px;font-weight:500;color:var(--text2);padding-top:2px}
+.tl-bar-wrap{position:relative}
+.tl-bar-bg{height:24px;background:var(--bg4);border-radius:4px;overflow:hidden;position:relative}
+.tl-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:500;white-space:nowrap;overflow:hidden;transition:width .4s}
+.tl-milestones{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.tl-milestone{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)}
+.tl-milestone::before{content:'◆';font-size:7px;color:var(--accent)}
+.tl-money-col{font-family:var(--font);font-size:13px;font-weight:700;color:var(--green);white-space:nowrap;padding-top:4px}
+
+/* ====== INACTIVE VIEW ====== */
+#vInactive{flex-direction:column}
+.inact-body{flex:1;overflow-y:auto;padding:20px}
+.inact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.inact-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;position:relative;overflow:hidden}
+.inact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red)}
+.inact-card.warm::before{background:var(--amber)}
+.inact-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.inact-info{flex:1}
+.inact-name{font-weight:500;font-size:13px}
+.inact-role{font-size:11px;color:var(--text3);margin-top:1px}
+.inact-days{font-size:11px;color:var(--red);margin-top:6px;background:rgba(239,68,68,0.1);border-radius:4px;padding:3px 7px;display:inline-block}
+.inact-card.warm .inact-days{color:var(--amber);background:rgba(245,158,11,0.1)}
+.reactivate-box{background:var(--bg3);border-radius:var(--r);padding:10px;border:1px solid var(--border)}
+.reactivate-title{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:6px}
+.reactivate-step{font-size:11px;color:var(--text2);padding:3px 0;display:flex;gap:6px;line-height:1.5}
+.reactivate-step::before{content:'→';color:var(--accent);flex-shrink:0}
+
+/* ====== MODALS ====== */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.on{opacity:1;pointer-events:auto}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r2);width:90%;max-width:540px;max-height:85vh;overflow-y:auto;padding:20px}
+.modal h3{font-family:var(--font);font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.modal h3 button{background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;line-height:1}
+.modal h3 button:hover{color:var(--text)}
+.form-row{margin-bottom:14px}
+.form-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:5px;display:block}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:8px 10px;color:var(--text);font-family:var(--mono);font-size:12.5px;outline:none;resize:vertical}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text3)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.color-chips{display:flex;gap:6px;flex-wrap:wrap}
+.color-chip{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.15s}
+.color-chip.sel{border-color:var(--text)}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+
+/* STEP EDITOR IN MODAL */
+.step-editor{display:flex;flex-direction:column;gap:6px}
+.step-editor-row{display:flex;gap:6px;align-items:center}
+.step-num-badge{width:22px;height:22px;border-radius:50%;background:var(--bg4);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+
+/* CATEGORY RANGE BADGE */
+.cat-range{font-size:10px;padding:2px 7px;border-radius:8px;background:rgba(6,182,212,0.12);color:var(--teal);border:1px solid rgba(6,182,212,0.2)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:10px 20px;font-size:12px;color:var(--text);opacity:0;transition:all .3s;z-index:500;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.success{border-color:rgba(34,197,94,0.4);color:var(--green)}
+.toast.error{border-color:rgba(239,68,68,0.4);color:var(--red)}
+
+/* GITHUB STATUS */
+.gh-status{padding:8px 12px;border-radius:var(--r);font-size:12px;margin-top:10px;display:none}
+.gh-status.ok{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:var(--green);display:block}
+.gh-status.err{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;display:block}
+.gh-status.loading{background:rgba(79,127,255,0.1);border:1px solid rgba(79,127,255,0.3);color:var(--accent);display:block}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><em>A</em>rqos <span style="font-size:11px;font-weight:400;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-left:2px">Relaciones</span></div>
+  <div class="tabs">
+    <button class="tab on" onclick="showView('vContacts',this)">Contactos</button>
+    <button class="tab" onclick="showView('vCalendar',this)">Calendario</button>
+    <button class="tab" onclick="showView('vTimeline',this)">Proyección</button>
+    <button class="tab" onclick="showView('vInactive',this)">Inactivos</button>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn" onclick="openModal('modalCategory',null)">+ Categoría</button>
+    <button class="btn primary" onclick="openModal('modalContact',null)">+ Contacto</button>
+    <div style="width:1px;height:24px;background:var(--border2);margin:0 2px"></div>
+    <button class="btn" onclick="exportCSV()" title="Exportar contactos a Excel / Sheets" style="color:var(--green)">📊 CSV</button>
+    <button class="btn" onclick="exportBackupJSON()" title="Descargar backup completo" style="color:var(--teal)">💾 Backup</button>
+    <button class="btn" onclick="openModal('modalGitHub',null)" title="Guardar en GitHub" style="color:var(--accent)">🐙 GitHub</button>
+    <label class="btn" style="cursor:pointer;color:var(--amber)" title="Restaurar desde backup JSON">
+      ↩ Restaurar<input type="file" accept=".json" style="display:none" onchange="importBackupJSON(event)" />
+    </label>
+  </div>
+</div>
+
+<!-- CONTACTS VIEW -->
+<div id="vContacts" class="view on">
+  <div class="ctbar">
+    <input class="search" placeholder="Buscar..." oninput="filterContacts(this.value)" />
+    <button class="filter-pill on" onclick="toggleFilter(this,'all')">Todos</button>
+    <button class="filter-pill" onclick="toggleFilter(this,'hot')">🔥 Activos</button>
+    <button class="filter-pill" onclick="toggleFilter(this,'money')">💰 Con meta $</button>
+    <button class="filter-pill" onclick="toggleFilter(this,'inactive')">😴 Inactivos</button>
+    <button class="filter-pill" onclick="openModal('modalCategory',null)" style="border-style:dashed">⚙ Categorías</button>
+    <select class="group-select" id="groupSelect" onchange="renderContacts()">
+      <option value="">Todas las categorías</option>
+    </select>
+  </div>
+  <div class="ctmain">
+    <div class="ct-list">
+      <table class="ctable" id="contactsTable">
+        <thead>
+          <tr>
+            <th>Contacto</th>
+            <th>Pasos (5)</th>
+            <th>Sector</th>
+            <th>Actividad</th>
+            <th>Estado</th>
+            <th>Notif.</th>
+            <th style="text-align:right">Meta $</th>
+          </tr>
+        </thead>
+        <tbody id="contactsTbody"></tbody>
+        <tfoot id="contactsTfoot"></tfoot>
+      </table>
+    </div>
+    <div class="ct-panel" id="ctPanel">
+      <div class="panel-empty">
+        <div style="font-size:28px">👆</div>
+        <div>Selecciona un contacto</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR VIEW -->
+<div id="vCalendar" class="view">
+  <div class="cal-header">
+    <div class="cal-nav">
+      <button onclick="calNav(-1)">‹</button>
+      <div class="cal-month-name" id="calMonthName"></div>
+      <button onclick="calNav(1)">›</button>
+    </div>
+    <button class="btn" onclick="calGoToday()">Hoy</button>
+    <button class="btn primary" onclick="openModal('modalEvent',null)">+ Evento</button>
+  </div>
+  <div class="cal-body">
+    <div class="cal-grid-wrap">
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+    <div class="cal-sidebar" id="calSidebar">
+      <div class="cal-side-date">Selecciona un día</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE VIEW -->
+<div id="vTimeline" class="view">
+  <div class="tl-header">
+    <span style="font-family:var(--font);font-weight:700;font-size:15px">Proyección de Relaciones</span>
+    <span style="color:var(--text3);font-size:12px">6 meses</span>
+    <div id="tlTotalBadge" style="margin-left:auto;font-family:var(--font);font-weight:800;font-size:18px;color:var(--green)"></div>
+  </div>
+  <div class="tl-body">
+    <div class="tl-months" id="tlMonths"></div>
+  </div>
+</div>
+
+<!-- INACTIVE VIEW -->
+<div id="vInactive" class="view">
+  <div class="tl-header">
+    <span style="font-family:var(--font);font-weight:700;font-size:15px">Contactos Inactivos</span>
+    <span style="color:var(--text3);font-size:12px">Estrategias de reactivación</span>
+  </div>
+  <div class="inact-body">
+    <div class="inact-grid" id="inactGrid"></div>
+  </div>
+</div>
+
+<!-- MODAL CONTACTO -->
+<div class="overlay" id="modalContact">
+  <div class="modal">
+    <h3 id="modalContactTitle">Nuevo Contacto <button onclick="closeModal('modalContact')">×</button></h3>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Nombre</label>
+        <input class="form-input" id="f-name" placeholder="Juan Pérez" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Empresa / Rol</label>
+        <input class="form-input" id="f-role" placeholder="CEO, Empresa X" />
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Sector</label>
+        <input class="form-input" id="f-sector" placeholder="Tech, Construcción..." />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Categoría</label>
+        <select class="form-input" id="f-category"></select>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Estado</label>
+        <select class="form-input" id="f-status">
+          <option value="new">Nuevo</option>
+          <option value="hot">Activo</option>
+          <option value="warm">Tibio</option>
+          <option value="cold">Frío</option>
+          <option value="inactive">Inactivo</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Actividad mía</label>
+        <input class="form-input" id="f-activity" placeholder="Ventas, Referencias..." />
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Meta de ingreso (MXN) — 0 si no aplica</label>
+      <input class="form-input" type="number" id="f-money" placeholder="0" value="0" />
+    </div>
+    <div class="form-row">
+      <label class="form-label">5 Pasos para llegar a la meta</label>
+      <div class="step-editor" id="stepEditor">
+        <div class="step-editor-row"><div class="step-num-badge">1</div><input class="form-input" placeholder="Ej: Primer contacto / reunión de conocimiento" /></div>
+        <div class="step-editor-row"><div class="step-num-badge">2</div><input class="form-input" placeholder="Ej: Presentar propuesta o catálogo" /></div>
+        <div class="step-editor-row"><div class="step-num-badge">3</div><input class="form-input" placeholder="Ej: Seguimiento y ajustes" /></div>
+        <div class="step-editor-row"><div class="step-num-badge">4</div><input class="form-input" placeholder="Ej: Negociación y cierre" /></div>
+        <div class="step-editor-row"><div class="step-num-badge">5</div><input class="form-input" placeholder="Ej: Entrega / post-venta / referencia" /></div>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Notas iniciales</label>
+      <textarea class="form-input" id="f-notes" rows="2" placeholder="Qué hace, cómo nos conocimos..."></textarea>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Color</label>
+        <div class="color-chips" id="colorChips"></div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Recordatorio (días)</label>
+        <input class="form-input" type="number" id="f-remind" value="14" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalContact')">Cancelar</button>
+      <button class="btn primary" onclick="saveContact()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CATEGORÍA -->
+<div class="overlay" id="modalCategory">
+  <div class="modal" style="max-width:560px">
+    <h3>Categorías <button onclick="closeModal('modalCategory')">×</button></h3>
+
+    <!-- EXISTING CATEGORIES -->
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px">Categorías existentes — haz clic para editar</div>
+    <div id="catList" style="margin-bottom:20px"></div>
+
+    <!-- INLINE EDIT FORM (hidden by default) -->
+    <div id="catEditBox" style="display:none;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);padding:14px;margin-bottom:16px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
+        <span id="catEditLabel">Editando categoría</span>
+        <button onclick="cancelCatEdit()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px">×</button>
+      </div>
+      <input type="hidden" id="cat-edit-id" />
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">Nombre</label>
+          <input class="form-input" id="cat-edit-name" />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Color</label>
+          <div class="color-chips" id="catEditColorChips"></div>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">Rango mín ($)</label>
+          <input class="form-input" type="number" id="cat-edit-min" placeholder="0" />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Rango máx ($)</label>
+          <input class="form-input" type="number" id="cat-edit-max" placeholder="0" />
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn danger sm" onclick="deleteCategoryConfirm()">🗑 Eliminar</button>
+        <button class="btn sm" onclick="cancelCatEdit()">Cancelar</button>
+        <button class="btn primary sm" onclick="updateCategory()">Guardar cambios</button>
+      </div>
+    </div>
+
+    <!-- NEW CATEGORY FORM -->
+    <div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px">+ Nueva categoría</div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Nombre</label>
+        <input class="form-input" id="cat-name" placeholder="Ej: Grandes cuentas" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Color</label>
+        <div class="color-chips" id="catColorChips"></div>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Rango mín ($)</label>
+        <input class="form-input" type="number" id="cat-min" placeholder="0" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Rango máx ($)</label>
+        <input class="form-input" type="number" id="cat-max" placeholder="0" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalCategory')">Cerrar</button>
+      <button class="btn primary" onclick="saveCategory()">+ Agregar categoría</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EVENTO CALENDARIO -->
+<div class="overlay" id="modalEvent">
+  <div class="modal" style="max-width:460px">
+    <h3>Evento / Tarea <button onclick="closeModal('modalEvent')">×</button></h3>
+    <div class="form-row">
+      <label class="form-label">Título</label>
+      <input class="form-input" id="ev-title" placeholder="Llamar, Enviar propuesta, Reunión..." />
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Fecha</label>
+        <input class="form-input" type="date" id="ev-date" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Hora</label>
+        <input class="form-input" type="time" id="ev-time" value="10:00" />
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Contacto</label>
+        <select class="form-input" id="ev-contact"></select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Tipo</label>
+        <select class="form-input" id="ev-type">
+          <option value="task">Tarea</option>
+          <option value="msg">Mensaje/WhatsApp</option>
+          <option value="note">Nota</option>
+          <option value="reminder">Recordatorio</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalEvent')">Cancelar</button>
+      <button class="btn primary" onclick="saveEvent()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOTA DIARIA -->
+<div class="overlay" id="modalNote">
+  <div class="modal" style="max-width:420px">
+    <h3>Anotación <button onclick="closeModal('modalNote')">×</button></h3>
+    <div class="form-row">
+      <label class="form-label">Fecha</label>
+      <input class="form-input" type="date" id="note-date" />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Nota</label>
+      <textarea class="form-input" id="note-text" rows="4" placeholder="Qué debo hacer hoy con este contacto..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalNote')">Cancelar</button>
+      <button class="btn primary" onclick="saveNote()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR CONTACTO -->
+<div class="overlay" id="modalEdit">
+  <div class="modal">
+    <h3>Editar Contacto <button onclick="closeModal('modalEdit')">×</button></h3>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Nombre</label>
+        <input class="form-input" id="e-name" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Empresa / Rol</label>
+        <input class="form-input" id="e-role" />
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Sector</label>
+        <input class="form-input" id="e-sector" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Categoría</label>
+        <select class="form-input" id="e-category"></select>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Actividad</label>
+        <input class="form-input" id="e-activity" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Estado</label>
+        <select class="form-input" id="e-status">
+          <option value="new">Nuevo</option>
+          <option value="hot">Activo</option>
+          <option value="warm">Tibio</option>
+          <option value="cold">Frío</option>
+          <option value="inactive">Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Meta ($)</label>
+        <input class="form-input" type="number" id="e-money" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Recordatorio (días)</label>
+        <input class="form-input" type="number" id="e-remind" />
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Editar pasos de la meta</label>
+      <div class="step-editor" id="editStepEditor"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn danger" onclick="deleteContact()">🗑 Eliminar contacto</button>
+      <button class="btn" onclick="closeModal('modalEdit')">Cancelar</button>
+      <button class="btn primary" onclick="updateContact()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MODAL GITHUB -->
+<div class="overlay" id="modalGitHub">
+  <div class="modal" style="max-width:480px">
+    <h3>🐙 Guardar en GitHub <button onclick="closeModal('modalGitHub')">×</button></h3>
+
+    <div style="background:var(--bg3);border-radius:var(--r2);padding:12px;margin-bottom:16px;border:1px solid var(--border);font-size:11.5px;color:var(--text2);line-height:1.7">
+      Guarda tu base de datos completa como <code style="color:var(--accent);background:var(--bg4);padding:1px 5px;border-radius:3px">arqos_db.json</code> en tu repo de GitHub.<br>
+      Tu token se guarda solo en este navegador (localStorage). Nunca sale a ningún servidor externo.
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">GitHub Token (Personal Access Token)</label>
+      <input class="form-input" type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+      <div style="font-size:10px;color:var(--text3);margin-top:4px">
+        Necesita permiso <code style="color:var(--accent)">repo</code> → 
+        <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent)">Crear token aquí</a>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">Usuario / Org</label>
+        <input class="form-input" id="gh-owner" placeholder="arqosystems" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Repositorio</label>
+        <input class="form-input" id="gh-repo" placeholder="relaciones" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">Ruta del archivo en el repo</label>
+      <input class="form-input" id="gh-path" placeholder="arqos_db.json" value="arqos_db.json" />
+    </div>
+
+    <div id="ghStatus" class="gh-status"></div>
+
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal('modalGitHub')">Cancelar</button>
+      <button class="btn" onclick="loadFromGitHub()" style="color:var(--teal);border-color:rgba(6,182,212,0.3)">↓ Cargar desde GitHub</button>
+      <button class="btn primary" onclick="saveToGitHub()">🐙 Guardar en GitHub</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const COLORS=['#4f7fff','#7c5cfc','#22c55e','#f59e0b','#ef4444','#06b6d4','#ec4899','#a78bfa','#34d399','#fb923c'];
+const STEP_DEFAULTS=[
+  'Primer contacto / reunión de conocimiento',
+  'Presentar propuesta o catálogo',
+  'Seguimiento y ajuste de detalles',
+  'Negociación y cierre',
+  'Entrega / post-venta / referencia'
+];
+
+function loadData(){
+  try{return JSON.parse(localStorage.getItem('arqos_pr_v3')||'null')||defaultData();}
+  catch(e){return defaultData();}
+}
+function saveData(){localStorage.setItem('arqos_pr_v3',JSON.stringify(DB));}
+function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().split('T')[0];}
+function futureDate(n){const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().split('T')[0];}
+function todayStr(offset=0){const d=new Date();d.setDate(d.getDate()+offset);return d.toISOString().split('T')[0];}
+
+function makeSteps(overrides=[]){
+  return STEP_DEFAULTS.map((def,i)=>({
+    id:'s'+Date.now()+i,
+    text:overrides[i]||def,
+    done:false,
+    doneDate:null
+  }));
+}
+
+function defaultData(){
+  return {
+    categories:[
+      {id:'cat1',name:'Grandes cuentas',color:'#4f7fff',minAmount:50000,maxAmount:200000},
+      {id:'cat2',name:'Medianas cuentas',color:'#22c55e',minAmount:10000,maxAmount:49999},
+      {id:'cat3',name:'Alianzas / Referidos',color:'#ec4899',minAmount:0,maxAmount:0},
+      {id:'cat4',name:'Prospecto nuevo',color:'#f59e0b',minAmount:0,maxAmount:9999}
+    ],
+    contacts:[
+      {id:'c1',name:'Sofía Reyes',role:'Directora de Operaciones, LogiMex',sector:'Logística',category:'cat1',activity:'Ventas CCTV + control acceso bodegas',status:'hot',money:120000,color:'#22c55e',notify:true,remindDays:5,lastContact:daysAgo(1),
+        steps:makeSteps(['Reunión inicial — ✓ Realizada','Propuesta 4 bodegas Vallejo','Visita técnica con ingeniero','Negociación y condiciones','Instalación y cierre de contrato']),
+        stepProgress:1,
+        notes:[{date:todayStr(-1),text:'Reunión excelente. Tiene presupuesto Q2. Quiere propuesta esta semana.'}],
+        goals:120000,reconnectTips:[]},
+
+      {id:'c2',name:'Rodrigo Vega',role:'Director Comercial, Constructora MX',sector:'Construcción',category:'cat1',activity:'Ventas CCTV institucional',status:'hot',money:85000,color:'#4f7fff',notify:true,remindDays:7,lastContact:daysAgo(3),
+        steps:makeSteps(['Reunión de presentación Arqos — ✓','Cotización torres del Sur','Demostración de sistema PTZ','Negociación presupuesto','Firma contrato + kick-off']),
+        stepProgress:2,
+        notes:[{date:todayStr(-3),text:'Pidió cotización formal para el edificio Torres del Sur.'}],
+        goals:85000,reconnectTips:[]},
+
+      {id:'c3',name:'Ana Martínez',role:'Gerente de Compras, Hotel Marqués',sector:'Hospitalidad',category:'cat2',activity:'CCTV hotelero + mantenimiento',status:'warm',money:42000,color:'#06b6d4',notify:true,remindDays:14,lastContact:daysAgo(18),
+        steps:makeSteps(),stepProgress:1,
+        notes:[{date:todayStr(-18),text:'WhatsApp enviado. Respondió pero sin avanzar en renovación.'}],
+        goals:42000,reconnectTips:[]},
+
+      {id:'c4',name:'Carlos Ibáñez',role:'Emprendedor, Sector Retail',sector:'Retail',category:'cat3',activity:'Referencias y alianzas',status:'cold',money:0,color:'#ec4899',notify:false,remindDays:30,lastContact:daysAgo(45),
+        steps:makeSteps(['Reconectar — enviar mensaje de valor','Café o llamada informal','Proponer modelo de referencias','Definir comisión o reciprocidad','Primera referencia concretada']),
+        stepProgress:0,
+        notes:[],goals:0,reconnectTips:['Enviar artículo de seguridad retail','Invitar a evento de networking','Proponer alianza de referencias mutuas']},
+
+      {id:'c5',name:'Marco Delgado',role:'Arquitecto independiente',sector:'Arquitectura',category:'cat3',activity:'Referencias a clientes',status:'inactive',money:0,color:'#f59e0b',notify:false,remindDays:45,lastContact:daysAgo(72),
+        steps:makeSteps(),stepProgress:0,
+        notes:[],goals:0,reconnectTips:['Comentar publicación reciente en LinkedIn','Enviar caso de éxito residencial','Proponer co-diseño en nuevos proyectos']}
+    ],
+    events:[
+      {id:'e1',title:'Llamar Rodrigo — seguimiento cotización',date:todayStr(2),time:'10:00',contact:'c2',type:'task'},
+      {id:'e2',title:'WhatsApp Ana Martínez — recordar mantenimiento',date:todayStr(4),time:'11:30',contact:'c3',type:'msg'},
+      {id:'e3',title:'Reunión Sofía Reyes — visita bodegas',date:todayStr(1),time:'09:00',contact:'c1',type:'task'}
+    ]
+  };
+}
+
+let DB=loadData();
+let selectedContact=null;
+let calYear=new Date().getFullYear();
+let calMonth=new Date().getMonth();
+let calSelectedDay=null;
+let activeFilter='all';
+let currentEditId=null;
+let currentNoteContactId=null;
+
+// ==================== UTILS ====================
+function initials(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
+function fmtMoney(n){if(!n)return '—';return '$'+Number(n).toLocaleString('es-MX');}
+function statusLabel(s){return {hot:'Activo',warm:'Tibio',cold:'Frío',new:'Nuevo',inactive:'Inactivo'}[s]||s;}
+function statusClass(s){return 'status-'+s;}
+function daysSince(d){return Math.round((new Date()-new Date(d))/(1000*60*60*24));}
+function getCategoryById(id){return DB.categories.find(c=>c.id===id);}
+
+// ==================== VIEWS ====================
+function showView(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='vCalendar') renderCalendar();
+  if(id==='vTimeline') renderTimeline();
+  if(id==='vInactive') renderInactive();
+}
+
+// ==================== MODALS ====================
+function openModal(id,data){
+  if(id==='modalContact'){
+    document.getElementById('modalContactTitle').innerHTML='Nuevo Contacto <button onclick="closeModal(\'modalContact\')">×</button>';
+    document.getElementById('f-name').value='';
+    document.getElementById('f-role').value='';
+    document.getElementById('f-sector').value='';
+    document.getElementById('f-activity').value='';
+    document.getElementById('f-money').value='0';
+    document.getElementById('f-notes').value='';
+    document.getElementById('f-remind').value='14';
+    document.getElementById('f-status').value='new';
+    populateCategorySelect('f-category','');
+    buildColorChips('colorChips',COLORS[Math.floor(Math.random()*COLORS.length)]);
+    // reset step editor
+    const se=document.getElementById('stepEditor');
+    se.innerHTML=STEP_DEFAULTS.map((d,i)=>`<div class="step-editor-row"><div class="step-num-badge">${i+1}</div><input class="form-input step-inp" placeholder="${d}" /></div>`).join('');
+  }
+  if(id==='modalCategory'){
+    buildColorChips('catColorChips',COLORS[Math.floor(Math.random()*COLORS.length)]);
+    renderCatList();
+  }
+  if(id==='modalEvent'){
+    document.getElementById('ev-date').value=todayStr();
+    document.getElementById('ev-title').value='';
+    const sel=document.getElementById('ev-contact');
+    sel.innerHTML='<option value="">— Sin contacto —</option>'+DB.contacts.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+    if(data&&data.date) document.getElementById('ev-date').value=data.date;
+    if(data&&data.contactId) document.getElementById('ev-contact').value=data.contactId;
+    if(data&&data.stepText) document.getElementById('ev-title').value=data.stepText;
+  }
+  if(id==='modalNote'){
+    document.getElementById('note-date').value=todayStr();
+    document.getElementById('note-text').value='';
+    currentNoteContactId=data?data.contactId:selectedContact;
+  }
+  if(id==='modalEdit'&&data){
+    const c=DB.contacts.find(x=>x.id===data.id);
+    if(!c)return;
+    currentEditId=c.id;
+    document.getElementById('e-name').value=c.name;
+    document.getElementById('e-role').value=c.role||'';
+    document.getElementById('e-sector').value=c.sector||'';
+    document.getElementById('e-activity').value=c.activity||'';
+    document.getElementById('e-money').value=c.money||0;
+    document.getElementById('e-remind').value=c.remindDays||14;
+    document.getElementById('e-status').value=c.status;
+    populateCategorySelect('e-category',c.category||'');
+    // render step editor
+    const steps=c.steps||makeSteps();
+    document.getElementById('editStepEditor').innerHTML=steps.map((s,i)=>
+      `<div class="step-editor-row">
+        <div class="step-num-badge" style="${s.done?'background:var(--green);color:#fff':''}">${s.done?'✓':(i+1)}</div>
+        <input class="form-input step-inp-e" value="${s.text}" placeholder="Paso ${i+1}" ${s.done?'style="text-decoration:line-through;color:var(--text3)"':''} />
+      </div>`
+    ).join('');
+  }
+  document.getElementById(id).classList.add('on');
+}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+
+function populateCategorySelect(elId,selected){
+  const el=document.getElementById(elId);
+  el.innerHTML='<option value="">Sin categoría</option>'+DB.categories.map(c=>`<option value="${c.id}"${c.id===selected?' selected':''}>${c.name}</option>`).join('');
+}
+
+function buildColorChips(containerId,selected){
+  document.getElementById(containerId).innerHTML=COLORS.map(c=>`<div class="color-chip${c===selected?' sel':''}" style="background:${c}" onclick="selectColor('${containerId}','${c}',this)"></div>`).join('');
+}
+function selectColor(cid,color,el){
+  document.querySelectorAll('#'+cid+' .color-chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function getSelectedColor(containerId){
+  const el=document.querySelector('#'+containerId+' .color-chip.sel');
+  return el?el.style.background:COLORS[0];
+}
+
+// ==================== CATEGORIES ====================
+function renderCatList(){
+  document.getElementById('catList').innerHTML=DB.categories.map(c=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--bg3);border-radius:var(--r);margin-bottom:6px;border:1px solid var(--border)">
+      <div style="width:12px;height:12px;border-radius:50%;background:${c.color};flex-shrink:0"></div>
+      <span style="flex:1;font-size:12px">${c.name}</span>
+      ${c.minAmount||c.maxAmount?`<span class="cat-range">${fmtMoney(c.minAmount)} – ${fmtMoney(c.maxAmount)}</span>`:'<span class="cat-range">Sin rango $</span>'}
+      <button class="btn sm danger" onclick="deleteCategory('${c.id}')">×</button>
+    </div>`).join('');
+}
+
+function saveCategory(){
+  const name=document.getElementById('cat-name').value.trim();
+  if(!name)return alert('Pon un nombre a la categoría');
+  DB.categories.push({
+    id:'cat'+Date.now(),
+    name,
+    color:getSelectedColor('catColorChips'),
+    minAmount:parseFloat(document.getElementById('cat-min').value)||0,
+    maxAmount:parseFloat(document.getElementById('cat-max').value)||0
+  });
+  saveData();
+  document.getElementById('cat-name').value='';
+  document.getElementById('cat-min').value='';
+  document.getElementById('cat-max').value='';
+  renderCatList();
+  updateGroupSelect();
+}
+
+// deleteCategory replaced by deleteCategoryConfirm
+
+function updateGroupSelect(){
+  const sel=document.getElementById('groupSelect');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Todas las categorías</option>'+DB.categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  sel.value=cur;
+}
+
+// ==================== SAVE ACTIONS ====================
+function getStepInputs(containerId){
+  return Array.from(document.querySelectorAll('#'+containerId+' .step-inp, #'+containerId+' .step-inp-e')).map(i=>i.value.trim());
+}
+
+function saveContact(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name)return alert('El nombre es requerido');
+  const stepTexts=getStepInputs('stepEditor');
+  const c={
+    id:'c'+Date.now(),
+    name,
+    role:document.getElementById('f-role').value.trim(),
+    sector:document.getElementById('f-sector').value.trim(),
+    category:document.getElementById('f-category').value,
+    activity:document.getElementById('f-activity').value.trim(),
+    status:document.getElementById('f-status').value,
+    money:parseFloat(document.getElementById('f-money').value)||0,
+    color:getSelectedColor('colorChips'),
+    notify:true,
+    remindDays:parseInt(document.getElementById('f-remind').value)||14,
+    lastContact:todayStr(),
+    steps:makeSteps(stepTexts),
+    stepProgress:0,
+    notes:document.getElementById('f-notes').value.trim()?[{date:todayStr(),text:document.getElementById('f-notes').value.trim()}]:[],
+    goals:parseFloat(document.getElementById('f-money').value)||0,
+    reconnectTips:[]
+  };
+  DB.contacts.push(c);
+  saveData();
+  closeModal('modalContact');
+  renderContacts();
+}
+
+function updateContact(){
+  const c=DB.contacts.find(x=>x.id===currentEditId);
+  if(!c)return;
+  c.name=document.getElementById('e-name').value.trim()||c.name;
+  c.role=document.getElementById('e-role').value.trim();
+  c.sector=document.getElementById('e-sector').value.trim();
+  c.category=document.getElementById('e-category').value;
+  c.activity=document.getElementById('e-activity').value.trim();
+  c.money=parseFloat(document.getElementById('e-money').value)||0;
+  c.goals=c.money;
+  c.remindDays=parseInt(document.getElementById('e-remind').value)||14;
+  c.status=document.getElementById('e-status').value;
+  // update step texts (keep done status)
+  const newTexts=getStepInputs('editStepEditor');
+  newTexts.forEach((t,i)=>{if(c.steps[i]&&t) c.steps[i].text=t;});
+  saveData();
+  closeModal('modalEdit');
+  renderContacts();
+  if(selectedContact===c.id) renderPanel(c.id);
+}
+
+function deleteContact(){
+  if(!confirm('¿Eliminar este contacto? Esta acción no se puede deshacer.'))return;
+  DB.contacts=DB.contacts.filter(x=>x.id!==currentEditId);
+  if(selectedContact===currentEditId){
+    selectedContact=null;
+    document.getElementById('ctPanel').innerHTML='<div class="panel-empty"><div style="font-size:28px">👆</div><div>Selecciona un contacto</div></div>';
+  }
+  saveData();
+  closeModal('modalEdit');
+  renderContacts();
+}
+
+function saveEvent(){
+  const title=document.getElementById('ev-title').value.trim();
+  if(!title)return alert('Pon un título');
+  DB.events.push({id:'e'+Date.now(),title,date:document.getElementById('ev-date').value,time:document.getElementById('ev-time').value,contact:document.getElementById('ev-contact').value,type:document.getElementById('ev-type').value});
+  saveData();
+  closeModal('modalEvent');
+  renderCalendar();
+}
+
+function saveNote(){
+  const text=document.getElementById('note-text').value.trim();
+  if(!text)return;
+  const c=DB.contacts.find(x=>x.id===currentNoteContactId);
+  if(!c)return;
+  c.notes.unshift({date:document.getElementById('note-date').value,text});
+  saveData();
+  closeModal('modalNote');
+  renderPanel(c.id);
+}
+
+// ==================== STEPS ====================
+function advanceStep(contactId,stepIdx){
+  const c=DB.contacts.find(x=>x.id===contactId);
+  if(!c||!c.steps)return;
+  const step=c.steps[stepIdx];
+  if(!step)return;
+
+  // mark this step done
+  step.done=true;
+  step.doneDate=todayStr();
+  c.lastContact=todayStr();
+
+  // update progress count
+  c.stepProgress=c.steps.filter(s=>s.done).length;
+
+  // auto-schedule next step in calendar
+  const nextStep=c.steps[stepIdx+1];
+  if(nextStep&&!nextStep.done){
+    const nextDate=futureDate(7);
+    DB.events.push({
+      id:'e'+Date.now(),
+      title:`[${c.name}] ${nextStep.text}`,
+      date:nextDate,
+      time:'10:00',
+      contact:c.id,
+      type:'task'
+    });
+  }
+  saveData();
+  renderPanel(c.id);
+  renderContacts();
+}
+
+function undoStep(contactId,stepIdx){
+  const c=DB.contacts.find(x=>x.id===contactId);
+  if(!c||!c.steps)return;
+  const step=c.steps[stepIdx];
+  if(!step)return;
+  step.done=false;
+  step.doneDate=null;
+  c.stepProgress=c.steps.filter(s=>s.done).length;
+  saveData();
+  renderPanel(c.id);
+  renderContacts();
+}
+
+// ==================== CONTACTS TABLE ====================
+function renderContacts(filterQ=''){
+  const tbody=document.getElementById('contactsTbody');
+  const tfoot=document.getElementById('contactsTfoot');
+  const groupId=document.getElementById('groupSelect').value;
+  let contacts=[...DB.contacts];
+  const q=filterQ||document.querySelector('.search')?.value||'';
+  if(q) contacts=contacts.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())||
+    (c.sector||'').toLowerCase().includes(q.toLowerCase())||
+    (c.activity||'').toLowerCase().includes(q.toLowerCase()));
+  if(activeFilter==='hot') contacts=contacts.filter(c=>c.status==='hot'||c.status==='new');
+  if(activeFilter==='money') contacts=contacts.filter(c=>c.money>0);
+  if(activeFilter==='inactive') contacts=contacts.filter(c=>c.status==='inactive'||c.status==='cold');
+  if(groupId) contacts=contacts.filter(c=>c.category===groupId);
+
+  // Group by category
+  const grouped={};
+  contacts.forEach(c=>{
+    const key=c.category||'__none__';
+    if(!grouped[key]) grouped[key]=[];
+    grouped[key].push(c);
+  });
+
+  // Build rows
+  let html='';
+  const catOrder=[...DB.categories.map(c=>c.id),'__none__'];
+  catOrder.forEach(catId=>{
+    const rows=grouped[catId];
+    if(!rows||!rows.length)return;
+    const cat=getCategoryById(catId);
+    const catTotal=rows.reduce((s,c)=>s+(c.money||0),0);
+    const catRange=cat&&(cat.minAmount||cat.maxAmount)?`${fmtMoney(cat.minAmount)} – ${fmtMoney(cat.maxAmount)}`:'';
+    html+=`<tr><td colspan="7" style="padding:0">
+      <div class="group-header">
+        ${cat?`<div style="width:8px;height:8px;border-radius:50%;background:${cat.color}"></div>`:''}
+        <span class="group-name">${cat?cat.name:'Sin categoría'}</span>
+        <span class="group-badge">${rows.length} contacto${rows.length!==1?'s':''}</span>
+        ${catRange?`<span class="cat-range">${catRange}</span>`:''}
+        ${catTotal?`<span style="font-family:var(--font);font-weight:700;font-size:12px;color:var(--green);margin-left:8px">${fmtMoney(catTotal)}</span>`:''}
+      </div>
+    </td></tr>`;
+
+    rows.forEach(c=>{
+      const days=c.lastContact?daysSince(c.lastContact):999;
+      const isOverdue=days>(c.remindDays||14)&&c.notify;
+      const steps=c.steps||makeSteps();
+      const stepDone=steps.filter(s=>s.done).length;
+      const notifyHtml=`<div class="toggle-sw${c.notify?' on':''}" onclick="toggleNotify('${c.id}',event)"></div>`;
+      const moneyHtml=c.money>0?`<span class="money-green">${fmtMoney(c.money)}</span>`:`<span style="color:var(--text3)">—</span>`;
+      const warningDot=isOverdue?`<span style="color:var(--red);font-size:14px" title="${days}d sin contacto"> ●</span>`:'';
+
+      // 5 step dots
+      const dotsHtml='<div class="step-dots">'+steps.map((s,i)=>{
+        const cls=s.done?'done':(i===stepDone?'active':'');
+        return `<div class="step-dot ${cls}" title="Paso ${i+1}: ${s.text}" onclick="event.stopPropagation();${s.done?`undoStep('${c.id}',${i})`:`advanceStep('${c.id}',${i})`}"></div>`;
+      }).join('')+`<span class="step-label">${stepDone}/5</span></div>`;
+
+      html+=`<tr class="ct-row${selectedContact===c.id?' sel':''}" onclick="renderPanel('${c.id}')">
+        <td><div class="ct-name-cell">
+          <div class="avatar" style="background:${c.color}22;color:${c.color}">${initials(c.name)}</div>
+          <div><div class="ct-name">${c.name}${warningDot}</div><div class="ct-role">${c.role||''}</div></div>
+        </div></td>
+        <td>${dotsHtml}</td>
+        <td style="color:var(--text2)">${c.sector||'—'}</td>
+        <td style="color:var(--text2);font-size:11px">${c.activity||'—'}</td>
+        <td><span class="badge ${statusClass(c.status)}">${statusLabel(c.status)}</span></td>
+        <td>${notifyHtml}</td>
+        <td>${moneyHtml}</td>
+      </tr>`;
+    });
+  });
+
+  tbody.innerHTML=html;
+  const total=contacts.reduce((s,c)=>s+(c.money||0),0);
+  tfoot.innerHTML=`<tr class="total-row"><td colspan="6" style="font-size:11px;color:var(--text3)">TOTAL PROYECTADO</td><td style="text-align:right;color:var(--green);font-family:var(--font);font-size:16px;font-weight:800">${fmtMoney(total)}</td></tr>`;
+}
+
+function filterContacts(q){renderContacts(q);}
+function toggleFilter(btn,type){
+  activeFilter=type;
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  renderContacts();
+}
+function toggleNotify(id,e){
+  e.stopPropagation();
+  const c=DB.contacts.find(x=>x.id===id);
+  if(c){c.notify=!c.notify;saveData();renderContacts();}
+}
+
+// ==================== PANEL ====================
+function renderPanel(id){
+  selectedContact=id;
+  const c=DB.contacts.find(x=>x.id===id);
+  if(!c)return;
+  const days=c.lastContact?daysSince(c.lastContact):0;
+  const isOverdue=days>(c.remindDays||14);
+  const steps=c.steps||makeSteps();
+  const stepDone=steps.filter(s=>s.done).length;
+  const pct=Math.round((stepDone/5)*100);
+  const cat=getCategoryById(c.category);
+
+  // Journey steps HTML
+  const journeyHtml=steps.map((s,i)=>{
+    const isDone=s.done;
+    const isActive=!isDone&&i===stepDone;
+    const isLocked=!isDone&&i>stepDone;
+    return `<div class="journey-step">
+      <div class="journey-left">
+        <div class="journey-circle${isDone?' done':isActive?' active':''}"
+          onclick="${isDone?`undoStep('${c.id}',${i})`:`advanceStep('${c.id}',${i})`}"
+          title="${isDone?'Click para desmarcar':'Click para marcar como completado'}">${isDone?'✓':(i+1)}</div>
+        ${i<4?`<div class="journey-line${isDone?' done':''}"></div>`:''}
+      </div>
+      <div class="journey-content">
+        <div class="journey-title${isDone?' done':''}">${s.text}</div>
+        ${s.doneDate?`<div class="journey-meta">Completado: ${s.doneDate}</div>`:''}
+        ${isActive?`<div class="journey-actions">
+          <button class="add-btn-sm" onclick="advanceStep('${c.id}',${i})">✓ Marcar listo</button>
+          <button class="add-btn-sm" onclick="openModal('modalEvent',{contactId:'${c.id}',stepText:'${s.text.replace(/'/g,'')}'})">📅 Agendar</button>
+        </div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const notesHtml=c.notes.length?c.notes.slice(0,5).map(n=>`<div class="note-item"><div class="note-date">${n.date}</div><div class="note-text">${n.text}</div></div>`).join(''):'<div style="color:var(--text3);font-size:11px">Sin anotaciones</div>';
+  const reconnectHtml=(c.status==='inactive'||c.status==='cold')&&c.reconnectTips.length?`<div class="reconnect-box"><h4>🔄 Cómo reactivar</h4>${c.reconnectTips.map(t=>`<div class="reconnect-step"><span>${t}</span></div>`).join('')}</div>`:'';
+
+  document.getElementById('ctPanel').innerHTML=`
+    <div class="panel-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="panel-avatar" style="background:${c.color}22;color:${c.color};width:46px;height:46px;font-size:15px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center">${initials(c.name)}</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="panel-name">${c.name}</span>
+            <span class="badge ${statusClass(c.status)}">${statusLabel(c.status)}</span>
+            ${cat?`<span style="font-size:10px;padding:2px 8px;border-radius:8px;background:${cat.color}22;color:${cat.color};border:1px solid ${cat.color}44">${cat.name}</span>`:''}
+          </div>
+          <div class="panel-role">${c.role||''}</div>
+        </div>
+        <div style="display:flex;gap:4px">
+          <button class="btn sm" onclick="openModal('modalEdit',{id:'${c.id}'})">Editar</button>
+          <button class="btn sm danger" onclick="if(confirm('¿Eliminar ${c.name}?')){deleteContactDirect('${c.id}')}">🗑</button>
+        </div>
+      </div>
+      ${c.sector?`<div class="panel-tags" style="margin-top:8px"><span class="tag" style="color:var(--teal);border-color:rgba(6,182,212,0.3)">${c.sector}</span>${(c.activity||'').split(',').filter(Boolean).map(a=>`<span class="tag">${a.trim()}</span>`).join('')}</div>`:''}
+      ${isOverdue?`<div style="margin-top:10px;padding:7px 10px;background:rgba(239,68,68,0.1);border-radius:var(--r);border:1px solid rgba(239,68,68,0.2);font-size:11px;color:#f87171">⚠️ ${days} días sin contacto</div>`:''}
+    </div>
+
+    ${c.money>0?`<div class="panel-section">
+      <div class="panel-section-title">Meta financiera</div>
+      <div class="money-projection">
+        <div class="money-amount">${fmtMoney(c.money)}</div>
+        <div class="money-label">Ingreso potencial · ${stepDone} de 5 pasos completados</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Progreso al objetivo</span><span>${pct}%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+    </div>`:''}
+
+    <div class="panel-section">
+      <div class="panel-section-title">5 Pasos hacia la meta</div>
+      <div class="journey">${journeyHtml}</div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">
+        Anotaciones diarias
+        <button class="add-btn-sm" onclick="openModal('modalNote',{contactId:'${c.id}'})">+ Nota</button>
+      </div>
+      ${notesHtml}
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Recordatorio</div>
+      <div class="notify-toggle">
+        <div class="toggle-sw${c.notify?' on':''}" onclick="toggleNotify('${c.id}',event)"></div>
+        <span style="font-size:12px;color:var(--text2)">Cada <strong>${c.remindDays||14}</strong> días</span>
+        ${days>0?`<span style="margin-left:auto;font-size:11px;color:${isOverdue?'var(--red)':'var(--text3)'}">Último: hace ${days}d</span>`:''}
+      </div>
+      <button class="add-btn-sm" style="margin-top:6px" onclick="openModal('modalEvent',{contactId:'${c.id}'})">📅 Agregar al calendario</button>
+    </div>
+
+    ${reconnectHtml?`<div class="panel-section">${reconnectHtml}</div>`:''}
+  `;
+  renderContacts();
+}
+
+function deleteContactDirect(id){
+  DB.contacts=DB.contacts.filter(x=>x.id!==id);
+  selectedContact=null;
+  saveData();
+  renderContacts();
+  document.getElementById('ctPanel').innerHTML='<div class="panel-empty"><div style="font-size:28px">👆</div><div>Selecciona un contacto</div></div>';
+}
+
+// ==================== CALENDAR ====================
+const MONTHS_ES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DAYS_ES=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+
+function renderCalendar(){
+  document.getElementById('calMonthName').textContent=`${MONTHS_ES[calMonth]} ${calYear}`;
+  const grid=document.getElementById('calGrid');
+  grid.innerHTML=DAYS_ES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const daysInPrev=new Date(calYear,calMonth,0).getDate();
+  const today=new Date().toISOString().split('T')[0];
+  for(let i=firstDay-1;i>=0;i--){
+    grid.innerHTML+=`<div class="cal-cell other-month"><div class="cal-num">${daysInPrev-i}</div></div>`;
+  }
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dayEvents=DB.events.filter(e=>e.date===dateStr);
+    const isToday=dateStr===today;
+    const isSel=dateStr===calSelectedDay;
+    grid.innerHTML+=`<div class="cal-cell${isToday?' today':''}${isSel?' sel':''}" onclick="showDayPanel('${dateStr}')">
+      <div class="cal-num">${d}</div>
+      ${dayEvents.slice(0,3).map(e=>`<div class="cal-event ev-${e.type}">${e.title}</div>`).join('')}
+    </div>`;
+  }
+  const totalCells=firstDay+daysInMonth;
+  const remaining=totalCells%7===0?0:7-(totalCells%7);
+  for(let d=1;d<=remaining;d++) grid.innerHTML+=`<div class="cal-cell other-month"><div class="cal-num">${d}</div></div>`;
+  if(calSelectedDay) showDayPanel(calSelectedDay);
+}
+
+function showDayPanel(dateStr){
+  calSelectedDay=dateStr;
+  const dayEvents=DB.events.filter(e=>e.date===dateStr);
+  const [y,m,d]=dateStr.split('-');
+  const label=`${parseInt(d)} de ${MONTHS_ES[parseInt(m)-1]} ${y}`;
+  document.getElementById('calSidebar').innerHTML=`
+    <div class="cal-side-date">${label}</div>
+    ${dayEvents.length?dayEvents.map(e=>{
+      const ct=DB.contacts.find(c=>c.id===e.contact);
+      return `<div class="cal-event-full" style="border-left-color:${e.type==='task'?'var(--accent)':e.type==='msg'?'var(--green)':e.type==='reminder'?'var(--pink)':'var(--amber)'}">
+        <div class="ev-title">${e.title}</div>
+        ${ct?`<div class="ev-contact">${ct.name}</div>`:''}
+        <div class="ev-time">${e.time||''}</div>
+        <button class="btn sm danger" style="margin-top:5px" onclick="deleteEvent('${e.id}')">Eliminar</button>
+      </div>`;
+    }).join(''):`<div class="cal-side-empty">Sin eventos</div>`}
+    <button class="btn" style="width:100%;margin-top:12px" onclick="openModal('modalEvent',{date:'${dateStr}'})">+ Agregar evento</button>`;
+  renderCalendar();
+}
+
+function deleteEvent(id){
+  DB.events=DB.events.filter(e=>e.id!==id);
+  saveData();
+  if(calSelectedDay) showDayPanel(calSelectedDay);
+}
+function calNav(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function calGoToday(){calYear=new Date().getFullYear();calMonth=new Date().getMonth();renderCalendar();}
+
+// ==================== TIMELINE ====================
+function renderTimeline(){
+  const now=new Date();
+  const months=[];
+  for(let i=0;i<6;i++){const d=new Date(now.getFullYear(),now.getMonth()+i,1);months.push({year:d.getFullYear(),month:d.getMonth()});}
+  const totalAll=DB.contacts.reduce((s,c)=>s+(c.money||0),0);
+  document.getElementById('tlTotalBadge').textContent='Total: '+fmtMoney(totalAll);
+  const ratios=[0.20,0.25,0.20,0.15,0.12,0.08];
+  document.getElementById('tlMonths').innerHTML=months.map(({year,month},mi)=>{
+    const monthTotal=DB.contacts.reduce((s,c)=>s+(c.money||0)*ratios[mi],0);
+    const rows=DB.contacts.map(c=>{
+      const steps=c.steps||makeSteps();
+      const pct=Math.min(100,Math.round(((steps.filter(s=>s.done).length)/5)*100)+mi*8);
+      const milestones=DB.events.filter(e=>e.contact===c.id&&e.date&&e.date.startsWith(`${year}-${String(month+1).padStart(2,'0')}`)).slice(0,2);
+      return `<div class="tl-row">
+        <div class="tl-ct-name"><div style="display:flex;align-items:center;gap:6px"><div class="avatar" style="width:20px;height:20px;font-size:8px;background:${c.color}22;color:${c.color}">${initials(c.name)}</div>${c.name.split(' ')[0]}</div></div>
+        <div class="tl-bar-wrap">
+          <div class="tl-bar-bg"><div class="tl-bar-fill" style="width:${pct}%;background:${c.color}33;color:${c.color}">${pct>15?pct+'%':''}</div></div>
+          ${milestones.length?`<div class="tl-milestones">${milestones.map(e=>`<div class="tl-milestone">${e.title.slice(0,50)}</div>`).join('')}</div>`:''}
+        </div>
+        <div class="tl-money-col">${c.money?fmtMoney(Math.round(c.money*ratios[mi])):'—'}</div>
+      </div>`;
+    }).join('');
+    return `<div class="tl-month"><div class="tl-month-header"><span class="tl-month-name">${MONTHS_ES[month]} ${year}</span><span class="tl-month-money">${fmtMoney(Math.round(monthTotal))}</span></div><div class="tl-rows">${rows}</div></div>`;
+  }).join('');
+}
+
+// ==================== INACTIVE ====================
+function renderInactive(){
+  const inactive=DB.contacts.filter(c=>{
+    const days=c.lastContact?daysSince(c.lastContact):999;
+    return c.status==='inactive'||c.status==='cold'||days>(c.remindDays||14)*2;
+  });
+  const grid=document.getElementById('inactGrid');
+  if(!inactive.length){grid.innerHTML='<div style="color:var(--text3);font-size:13px;padding:20px;grid-column:1/-1">¡Todos tus contactos están activos! 🎉</div>';return;}
+  grid.innerHTML=inactive.map(c=>{
+    const days=c.lastContact?daysSince(c.lastContact):0;
+    const isVery=days>60;
+    const tips=c.reconnectTips.length?c.reconnectTips:generateTips(c);
+    return `<div class="inact-card${isVery?'':' warm'}">
+      <div class="inact-top">
+        <div class="avatar" style="background:${c.color}22;color:${c.color};width:38px;height:38px;font-size:13px">${initials(c.name)}</div>
+        <div class="inact-info">
+          <div class="inact-name">${c.name}</div>
+          <div class="inact-role">${c.role||''}</div>
+          <div class="inact-days">Hace ${days} días sin contacto</div>
+        </div>
+      </div>
+      <div class="reactivate-box">
+        <div class="reactivate-title">Plan de reactivación</div>
+        ${tips.slice(0,3).map(t=>`<div class="reactivate-step">${t}</div>`).join('')}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <button class="btn primary" style="flex:1;font-size:11px" onclick="markContacted('${c.id}')">✓ Lo contacté hoy</button>
+        <button class="btn" style="font-size:11px" onclick="renderPanel('${c.id}');showView('vContacts',document.querySelectorAll('.tab')[0])">Ver perfil</button>
+        <button class="btn danger" style="font-size:11px" onclick="if(confirm('¿Eliminar ${c.name}?')){deleteContactDirect('${c.id}');renderInactive()}">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function generateTips(c){
+  const tips=[];
+  if(c.sector) tips.push(`Enviar artículo relevante sobre ${c.sector}`);
+  if(c.activity) tips.push(`Compartir caso de éxito: ${c.activity}`);
+  tips.push('WhatsApp casual — sin agenda comercial directa');
+  tips.push('Invitar a evento o reunión informal');
+  return tips;
+}
+function markContacted(id){
+  const c=DB.contacts.find(x=>x.id===id);
+  if(c){c.lastContact=todayStr();c.status='warm';saveData();renderInactive();renderContacts();}
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded',()=>{
+  updateGroupSelect();
+  renderContacts();
+  calSelectedDay=todayStr();
+  document.querySelectorAll('.overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('on');});});
+});
+
+// ==================== TOAST ====================
+function showToast(msg, type='', duration=3000){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type?' '+type:'');
+  void t.offsetWidth;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), duration);
+}
+
+// ==================== EXPORT CSV ====================
+function exportCSV(){
+  const headers = ['Nombre','Rol','Sector','Categoría','Actividad','Estado','Meta $','Pasos completados','Último contacto','Notificaciones','Recordatorio días'];
+  const rows = DB.contacts.map(c=>{
+    const cat = getCategoryById(c.category);
+    const stepsDone = (c.steps||[]).filter(s=>s.done).length;
+    return [
+      c.name,
+      c.role||'',
+      c.sector||'',
+      cat?cat.name:'Sin categoría',
+      c.activity||'',
+      statusLabel(c.status),
+      c.money||0,
+      stepsDone+'/5',
+      c.lastContact||'',
+      c.notify?'Sí':'No',
+      c.remindDays||14
+    ].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',');
+  });
+
+  // Add category summary at bottom
+  rows.push('');
+  rows.push('"--- RESUMEN POR CATEGORÍA ---"');
+  DB.categories.forEach(cat=>{
+    const cts = DB.contacts.filter(c=>c.category===cat.id);
+    const total = cts.reduce((s,c)=>s+(c.money||0),0);
+    rows.push(`"${cat.name}","${cts.length} contactos","Total: $${total.toLocaleString('es-MX')}","Rango: ${fmtMoney(cat.minAmount)} – ${fmtMoney(cat.maxAmount)}"`);
+  });
+  const totalAll = DB.contacts.reduce((s,c)=>s+(c.money||0),0);
+  rows.push(`"TOTAL GENERAL","","$${totalAll.toLocaleString('es-MX')}"`);
+
+  const csv = '﻿' + [headers.join(','), ...rows].join('
+');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'arqos_relaciones_'+todayStr()+'.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✓ CSV exportado — ábrelo en Excel o Sheets', 'success');
+}
+
+// ==================== BACKUP JSON ====================
+function exportBackupJSON(){
+  const data = JSON.stringify(DB, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'arqos_backup_'+todayStr()+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✓ Backup descargado — guárdalo en lugar seguro', 'success');
+}
+
+function importBackupJSON(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.contacts || !Array.isArray(data.contacts)) throw new Error('Formato inválido');
+      if(!confirm(`¿Restaurar backup? Se reemplazarán ${DB.contacts.length} contacto(s) actuales con ${data.contacts.length} del backup.`)) return;
+      DB = data;
+      saveData();
+      updateGroupSelect();
+      renderContacts();
+      selectedContact = null;
+      document.getElementById('ctPanel').innerHTML = '<div class="panel-empty"><div style="font-size:28px">✓</div><div>Backup restaurado</div></div>';
+      showToast('✓ Backup restaurado correctamente — '+data.contacts.length+' contactos', 'success', 4000);
+    } catch(err){
+      showToast('Error: archivo inválido o corrupto', 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ==================== GITHUB SYNC ====================
+function getGHConfig(){
+  const token = document.getElementById('gh-token').value.trim() || localStorage.getItem('arqos_gh_token') || '';
+  const owner = document.getElementById('gh-owner').value.trim() || localStorage.getItem('arqos_gh_owner') || '';
+  const repo  = document.getElementById('gh-repo').value.trim()  || localStorage.getItem('arqos_gh_repo')  || '';
+  const path  = document.getElementById('gh-path').value.trim()  || 'arqos_db.json';
+  return {token, owner, repo, path};
+}
+
+function saveGHConfig({token, owner, repo, path}){
+  if(token) localStorage.setItem('arqos_gh_token', token);
+  if(owner) localStorage.setItem('arqos_gh_owner', owner);
+  if(repo)  localStorage.setItem('arqos_gh_repo', repo);
+}
+
+function setGHStatus(msg, type){
+  const el = document.getElementById('ghStatus');
+  el.textContent = msg;
+  el.className = 'gh-status ' + type;
+}
+
+// pre-fill from saved config when opening modal
+const _origOpenModal = openModal;
+function openModal(id, data){
+  _origOpenModal(id, data);
+  if(id === 'modalGitHub'){
+    const t = localStorage.getItem('arqos_gh_token');
+    const o = localStorage.getItem('arqos_gh_owner');
+    const r = localStorage.getItem('arqos_gh_repo');
+    if(t) document.getElementById('gh-token').value = t;
+    if(o) document.getElementById('gh-owner').value = o;
+    if(r) document.getElementById('gh-repo').value = r;
+    document.getElementById('ghStatus').className = 'gh-status';
+  }
+}
+
+async function saveToGitHub(){
+  const cfg = getGHConfig();
+  if(!cfg.token || !cfg.owner || !cfg.repo){
+    setGHStatus('⚠ Completa token, usuario y repositorio', 'err'); return;
+  }
+  saveGHConfig(cfg);
+  setGHStatus('⏳ Guardando en GitHub...', 'loading');
+
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(DB, null, 2))));
+  const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
+
+  try {
+    // Check if file exists to get its SHA (required for update)
+    let sha = null;
+    const check = await fetch(apiUrl, {
+      headers: { 'Authorization': 'token '+cfg.token, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if(check.ok){ const j = await check.json(); sha = j.sha; }
+
+    const body = {
+      message: 'Arqos DB backup — '+new Date().toLocaleString('es-MX'),
+      content,
+      ...(sha ? {sha} : {})
+    };
+
+    const res = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token '+cfg.token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if(res.ok){
+      const j = await res.json();
+      const commitUrl = j.commit?.html_url || `https://github.com/${cfg.owner}/${cfg.repo}`;
+      setGHStatus(`✓ Guardado en github.com/${cfg.owner}/${cfg.repo}/${cfg.path}`, 'ok');
+      showToast('✓ Base de datos guardada en GitHub', 'success');
+    } else {
+      const err = await res.json();
+      setGHStatus('Error '+res.status+': '+(err.message||'Sin detalle'), 'err');
+    }
+  } catch(e){
+    setGHStatus('Error de red: '+e.message, 'err');
+  }
+}
+
+async function loadFromGitHub(){
+  const cfg = getGHConfig();
+  if(!cfg.token || !cfg.owner || !cfg.repo){
+    setGHStatus('⚠ Completa token, usuario y repositorio', 'err'); return;
+  }
+  saveGHConfig(cfg);
+  setGHStatus('⏳ Cargando desde GitHub...', 'loading');
+
+  const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
+  try {
+    const res = await fetch(apiUrl, {
+      headers: { 'Authorization': 'token '+cfg.token, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if(!res.ok){ const err = await res.json(); setGHStatus('Error '+res.status+': '+(err.message||'Archivo no encontrado'), 'err'); return; }
+    const j = await res.json();
+    const decoded = decodeURIComponent(escape(atob(j.content.replace(/
+/g,''))));
+    const data = JSON.parse(decoded);
+    if(!data.contacts) throw new Error('Formato inválido');
+    if(!confirm(`¿Cargar backup de GitHub? (${data.contacts.length} contactos)
+Se reemplazarán los datos locales actuales.`)) { setGHStatus('',''); return; }
+    DB = data;
+    saveData();
+    updateGroupSelect();
+    renderContacts();
+    selectedContact = null;
+    document.getElementById('ctPanel').innerHTML = '<div class="panel-empty"><div style="font-size:28px">✓</div><div>Datos cargados desde GitHub</div></div>';
+    setGHStatus(`✓ Restaurado desde GitHub — ${data.contacts.length} contactos`, 'ok');
+    showToast('✓ Datos restaurados desde GitHub', 'success', 4000);
+  } catch(e){
+    setGHStatus('Error: '+e.message, 'err');
+  }
+}
+</script>
+</body>
+</html>
