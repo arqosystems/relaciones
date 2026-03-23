@@ -103,7 +103,8 @@
           "id": "s17742624366510",
           "text": "Reunion",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-23"
         },
         {
           "id": "s17742624366511",
@@ -127,7 +128,8 @@
           "id": "s17742624366514",
           "text": "Entrega / post-venta / referencia",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-28"
         }
       ],
       "stepProgress": 0,
@@ -628,6 +630,34 @@
       "date": "2026-04-12",
       "time": "10:00",
       "contact": "c1774269901587",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270087370",
+      "title": "[Jose Manuel] Paso 1: Reunion",
+      "date": "2026-03-23",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "e1774270094179",
+      "title": "[Jose Manuel] Presentar propuesta o catálogo",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "estep1774270102955",
+      "title": "[Jose Manuel] Paso 5: Entrega / post-venta / referencia",
+      "date": "2026-03-28",
+      "time": "10:00",
+      "contact": "c1774262436651",
       "type": "task",
       "stepIdx": 4,
       "isStepSchedule": true
