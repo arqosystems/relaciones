@@ -48,7 +48,8 @@
           "id": "s17742623832520",
           "text": "Establecer un interes",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
         },
         {
           "id": "s17742623832521",
@@ -870,6 +871,16 @@
       "contact": "c1774270801825",
       "type": "task",
       "stepIdx": 1,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270879010",
+      "title": "[JPablo] Paso 1: Establecer un interes",
+      "date": "2026-03-24",
+      "time": "10:00",
+      "contact": "c1774262383251",
+      "type": "task",
+      "stepIdx": 0,
       "isStepSchedule": true
     }
   ]
