@@ -608,6 +608,56 @@
       "notes": [],
       "goals": 10000,
       "reconnectTips": []
+    },
+    {
+      "id": "c1774271410719",
+      "name": "Manuel",
+      "role": "Mezcal",
+      "sector": "Varios",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 10000,
+      "color": "rgb(124, 92, 252)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742714107190",
+          "text": "Estrategias",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714107191",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714107192",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714107193",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742714107204",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 10000,
+      "reconnectTips": []
     }
   ],
   "events": [
