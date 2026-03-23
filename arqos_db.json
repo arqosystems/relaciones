@@ -101,20 +101,19 @@
       "steps": [
         {
           "id": "s17742624366510",
-          "text": "Reunion Presentar Plan de Negocios Arqos",
+          "text": "Reunion",
           "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-23"
+          "doneDate": null
         },
         {
           "id": "s17742624366511",
-          "text": "Estrategia 2",
+          "text": "Presentar propuesta o catálogo",
           "done": false,
           "doneDate": null
         },
         {
           "id": "s17742624366512",
-          "text": "Estrategia 3",
+          "text": "Seguimiento y ajuste de detalles",
           "done": false,
           "doneDate": null
         },
@@ -126,10 +125,9 @@
         },
         {
           "id": "s17742624366514",
-          "text": "Prestamo de 30,000",
+          "text": "Entrega / post-venta / referencia",
           "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-28"
+          "doneDate": null
         }
       ],
       "stepProgress": 0,
@@ -339,9 +337,9 @@
     },
     {
       "id": "c1774264178706",
-      "name": "Rojan",
-      "role": "Kinshasa",
-      "sector": "Musica",
+      "name": "Booker Kinshasa",
+      "role": "",
+      "sector": "",
       "category": "",
       "activity": "",
       "status": "new",
@@ -390,8 +388,8 @@
     {
       "id": "c1774264313038",
       "name": "Fano",
-      "role": "SunDance",
-      "sector": "Musica",
+      "role": "",
+      "sector": "",
       "category": "",
       "activity": "",
       "status": "new",
@@ -405,24 +403,23 @@
           "id": "s17742643130380",
           "text": "Fecha apartada",
           "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-24"
+          "doneDate": null
         },
         {
           "id": "s17742643130381",
-          "text": "Enviar Stems",
+          "text": "Segundo Contacto",
           "done": false,
           "doneDate": null
         },
         {
           "id": "s17742643130382",
-          "text": "?",
+          "text": "Seguimiento y ajuste de detalles",
           "done": false,
           "doneDate": null
         },
         {
           "id": "s17742643130383",
-          "text": "?",
+          "text": "Negociación y cierre",
           "done": false,
           "doneDate": null
         },
@@ -440,104 +437,50 @@
       "reconnectTips": []
     },
     {
-      "id": "c1774264613857",
-      "name": "Felix",
+      "id": "c1774269901587",
+      "name": "Sada",
       "role": "",
       "sector": "Audio",
       "category": "",
       "activity": "",
       "status": "new",
-      "money": 25000,
-      "color": "rgb(52, 211, 153)",
-      "notify": true,
-      "remindDays": 1,
-      "lastContact": "2026-03-23",
-      "steps": [
-        {
-          "id": "s17742646138570",
-          "text": "Confirmar Cita de Mañana",
-          "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-30"
-        },
-        {
-          "id": "s17742646138571",
-          "text": "Ir a medir su espacio con micros y software",
-          "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-24"
-        },
-        {
-          "id": "s17742646138572",
-          "text": "Presentacion Cotizacion",
-          "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-24"
-        },
-        {
-          "id": "s17742646138573",
-          "text": "Pago de Anticipo",
-          "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-03-27"
-        },
-        {
-          "id": "s17742646138574",
-          "text": "Comenzar Construcción",
-          "done": false,
-          "doneDate": null,
-          "scheduledDate": "2026-04-04"
-        }
-      ],
-      "stepProgress": 0,
-      "notes": [],
-      "goals": 25000,
-      "reconnectTips": []
-    },
-    {
-      "id": "c1774266395652",
-      "name": "VictorS",
-      "role": "Doula",
-      "sector": "Musica",
-      "category": "",
-      "activity": "",
-      "status": "new",
       "money": 20000,
-      "color": "rgb(52, 211, 153)",
+      "color": "rgb(167, 139, 250)",
       "notify": true,
       "remindDays": 1,
       "lastContact": "2026-03-23",
       "steps": [
         {
-          "id": "s17742663956530",
-          "text": "Primer contacto",
+          "id": "s17742699015870",
+          "text": "Poner al día sobre lo de su tío",
           "done": false,
           "doneDate": null,
-          "scheduledDate": "2026-03-26"
+          "scheduledDate": "2026-03-23"
         },
         {
-          "id": "s17742663956531",
+          "id": "s17742699015871",
           "text": "Presentar propuesta o catálogo",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742663956532",
+          "id": "s17742699015872",
           "text": "Seguimiento y ajuste de detalles",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742663956533",
+          "id": "s17742699015873",
           "text": "Negociación y cierre",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742663956534",
-          "text": "Tocar en el congreso",
+          "id": "s17742699015874",
+          "text": "Hacer el proyecto de su tio",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-04-12"
         }
       ],
       "stepProgress": 0,
@@ -547,6 +490,38 @@
     }
   ],
   "events": [
+    {
+      "id": "e1",
+      "title": "Llamar Rodrigo — seguimiento cotización",
+      "date": "2026-03-25",
+      "time": "10:00",
+      "contact": "c2",
+      "type": "task"
+    },
+    {
+      "id": "e2",
+      "title": "WhatsApp Ana Martínez — recordar mantenimiento",
+      "date": "2026-03-27",
+      "time": "11:30",
+      "contact": "c3",
+      "type": "msg"
+    },
+    {
+      "id": "e3",
+      "title": "Reunión Sofía Reyes — visita bodegas",
+      "date": "2026-03-24",
+      "time": "09:00",
+      "contact": "c1",
+      "type": "task"
+    },
+    {
+      "id": "e1774262706476",
+      "title": "Reunión",
+      "date": "2026-03-23",
+      "time": "19:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
     {
       "id": "e1774263406674",
       "title": "[Jose Manuel] Entrega / post-venta / referencia",
@@ -638,93 +613,23 @@
       "isStepSchedule": true
     },
     {
-      "id": "estep1774265212402",
-      "title": "[Jose Manuel] Paso 1: Reunion",
+      "id": "estep1774269954770",
+      "title": "[Sada] Paso 1: Poner al día sobre lo de su tío",
       "date": "2026-03-23",
       "time": "10:00",
-      "contact": "c1774262436651",
+      "contact": "c1774269901587",
       "type": "task",
       "stepIdx": 0,
       "isStepSchedule": true
     },
     {
-      "id": "estep1774265324368",
-      "title": "[Jose Manuel] Paso 5: Prestamo de 30,000",
-      "date": "2026-03-28",
+      "id": "estep1774269964962",
+      "title": "[Sada] Paso 5: Hacer el proyecto de su tio",
+      "date": "2026-04-12",
       "time": "10:00",
-      "contact": "c1774262436651",
+      "contact": "c1774269901587",
       "type": "task",
       "stepIdx": 4,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265402819",
-      "title": "[Felix] Paso 1: Confirmar Cita de Mañana",
-      "date": "2026-03-30",
-      "time": "10:00",
-      "contact": "c1774264613857",
-      "type": "task",
-      "stepIdx": 0,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265408255",
-      "title": "[Felix] Paso 2: Ir a medir su espacio con micros y software",
-      "date": "2026-03-24",
-      "time": "10:00",
-      "contact": "c1774264613857",
-      "type": "task",
-      "stepIdx": 1,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265416047",
-      "title": "[Felix] Paso 3: Presentacion Cotizacion",
-      "date": "2026-03-24",
-      "time": "10:00",
-      "contact": "c1774264613857",
-      "type": "task",
-      "stepIdx": 2,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265424352",
-      "title": "[Felix] Paso 4: Pago de Anticipo",
-      "date": "2026-03-27",
-      "time": "10:00",
-      "contact": "c1774264613857",
-      "type": "task",
-      "stepIdx": 3,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265470238",
-      "title": "[Felix] Paso 5: Comenzar Construcción",
-      "date": "2026-04-04",
-      "time": "10:00",
-      "contact": "c1774264613857",
-      "type": "task",
-      "stepIdx": 4,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774265504015",
-      "title": "[Fano] Paso 1: Fecha apartada",
-      "date": "2026-03-24",
-      "time": "10:00",
-      "contact": "c1774264313038",
-      "type": "task",
-      "stepIdx": 0,
-      "isStepSchedule": true
-    },
-    {
-      "id": "estep1774266412600",
-      "title": "[VictorS] Paso 1: Primer contacto",
-      "date": "2026-03-26",
-      "time": "10:00",
-      "contact": "c1774266395652",
-      "type": "task",
-      "stepIdx": 0,
       "isStepSchedule": true
     }
   ]
