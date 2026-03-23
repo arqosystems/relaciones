@@ -312,7 +312,8 @@
           "id": "s17742641787060",
           "text": "Primer Contacto",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-25"
         },
         {
           "id": "s17742641787061",
@@ -336,7 +337,8 @@
           "id": "s17742641787064",
           "text": "Tocar en Abril",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-04-18"
         }
       ],
       "stepProgress": 0,
@@ -362,7 +364,8 @@
           "id": "s17742643130380",
           "text": "Fecha apartada",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-26"
         },
         {
           "id": "s17742643130381",
@@ -687,6 +690,36 @@
       "contact": "c1774264102413",
       "type": "task",
       "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270381388",
+      "title": "[Booker Kinshasa] Paso 1: Primer Contacto",
+      "date": "2026-03-25",
+      "time": "10:00",
+      "contact": "c1774264178706",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270393328",
+      "title": "[Booker Kinshasa] Paso 5: Tocar en Abril",
+      "date": "2026-04-18",
+      "time": "10:00",
+      "contact": "c1774264178706",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270408187",
+      "title": "[Fano] Paso 1: Fecha apartada",
+      "date": "2026-03-26",
+      "time": "10:00",
+      "contact": "c1774264313038",
+      "type": "task",
+      "stepIdx": 0,
       "isStepSchedule": true
     }
   ]
