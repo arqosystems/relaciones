@@ -468,7 +468,8 @@
           "id": "s17742706696810",
           "text": "Primer Contacto",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-26"
         },
         {
           "id": "s17742706696811",
@@ -498,6 +499,61 @@
       "stepProgress": 0,
       "notes": [],
       "goals": 20000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774270801825",
+      "name": "Felix",
+      "role": "Estudio",
+      "sector": "Musica",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 25000,
+      "color": "rgb(124, 92, 252)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742708018260",
+          "text": "Recordar Cita de Martes",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-23"
+        },
+        {
+          "id": "s17742708018261",
+          "text": "Ir a medir su estudio",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
+        },
+        {
+          "id": "s17742708018262",
+          "text": "Cotizacion de su estudio",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-25"
+        },
+        {
+          "id": "s17742708018263",
+          "text": "Recibir Anticipo",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-28"
+        },
+        {
+          "id": "s17742708018264",
+          "text": "Contrucción Estudio",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-04-04"
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 25000,
       "reconnectTips": []
     }
   ],
@@ -754,6 +810,66 @@
       "contact": "c1774264313038",
       "type": "task",
       "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270695836",
+      "title": "[VictorS] Paso 1: Primer Contacto",
+      "date": "2026-03-26",
+      "time": "10:00",
+      "contact": "c1774270669681",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270807413",
+      "title": "[Felix] Paso 1: Recordar Cita de Martes",
+      "date": "2026-03-23",
+      "time": "10:00",
+      "contact": "c1774270801825",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270818642",
+      "title": "[Felix] Paso 5: Contrucción Estudio",
+      "date": "2026-04-04",
+      "time": "10:00",
+      "contact": "c1774270801825",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270825813",
+      "title": "[Felix] Paso 4: Recibir Anticipo",
+      "date": "2026-03-28",
+      "time": "10:00",
+      "contact": "c1774270801825",
+      "type": "task",
+      "stepIdx": 3,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270833710",
+      "title": "[Felix] Paso 3: Cotizacion de su estudio",
+      "date": "2026-03-25",
+      "time": "10:00",
+      "contact": "c1774270801825",
+      "type": "task",
+      "stepIdx": 2,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270835735",
+      "title": "[Felix] Paso 2: Ir a medir su estudio",
+      "date": "2026-03-24",
+      "time": "10:00",
+      "contact": "c1774270801825",
+      "type": "task",
+      "stepIdx": 1,
       "isStepSchedule": true
     }
   ]
