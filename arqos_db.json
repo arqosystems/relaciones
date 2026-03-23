@@ -243,56 +243,6 @@
       "reconnectTips": []
     },
     {
-      "id": "c1774264026156",
-      "name": "Alex",
-      "role": "",
-      "sector": "Arqos",
-      "category": "cat2",
-      "activity": "",
-      "status": "new",
-      "money": 14000,
-      "color": "rgb(124, 92, 252)",
-      "notify": true,
-      "remindDays": 1,
-      "lastContact": "2026-03-23",
-      "steps": [
-        {
-          "id": "s17742640261560",
-          "text": "Ponerle su sistema",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742640261561",
-          "text": "Presentar propuesta o catálogo",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742640261562",
-          "text": "Seguimiento y ajuste de detalles",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742640261563",
-          "text": "Negociación y cierre",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742640261564",
-          "text": "Entrega / post-venta / referencia",
-          "done": false,
-          "doneDate": null
-        }
-      ],
-      "stepProgress": 0,
-      "notes": [],
-      "goals": 14000,
-      "reconnectTips": []
-    },
-    {
       "id": "c1774264102413",
       "name": "SantiagoH",
       "role": "",
@@ -310,7 +260,8 @@
           "id": "s17742641024140",
           "text": "Primer Contacto",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-23"
         },
         {
           "id": "s17742641024141",
@@ -334,7 +285,8 @@
           "id": "s17742641024144",
           "text": "Tocar en Tonal",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-05-15"
         }
       ],
       "stepProgress": 0,
@@ -713,6 +665,26 @@
       "date": "2026-04-11",
       "time": "10:00",
       "contact": "c1774262383251",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270320142",
+      "title": "[SantiagoH] Paso 1: Primer Contacto",
+      "date": "2026-03-23",
+      "time": "10:00",
+      "contact": "c1774264102413",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774270363290",
+      "title": "[SantiagoH] Paso 5: Tocar en Tonal",
+      "date": "2026-05-15",
+      "time": "10:00",
+      "contact": "c1774264102413",
       "type": "task",
       "stepIdx": 4,
       "isStepSchedule": true
