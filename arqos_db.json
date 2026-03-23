@@ -1,0 +1,333 @@
+{
+  "categories": [
+    {
+      "id": "cat1",
+      "name": "Grandes cuentas",
+      "color": "#4f7fff",
+      "minAmount": 50000,
+      "maxAmount": 200000
+    },
+    {
+      "id": "cat2",
+      "name": "Medianas cuentas",
+      "color": "#22c55e",
+      "minAmount": 10000,
+      "maxAmount": 49999
+    },
+    {
+      "id": "cat3",
+      "name": "Alianzas / Referidos",
+      "color": "#ec4899",
+      "minAmount": 0,
+      "maxAmount": 0
+    },
+    {
+      "id": "cat4",
+      "name": "Prospecto nuevo",
+      "color": "#f59e0b",
+      "minAmount": 0,
+      "maxAmount": 9999
+    }
+  ],
+  "contacts": [
+    {
+      "id": "c1",
+      "name": "Sofía Reyes",
+      "role": "Directora de Operaciones, LogiMex",
+      "sector": "Logística",
+      "category": "cat1",
+      "activity": "Ventas CCTV + control acceso bodegas",
+      "status": "hot",
+      "money": 120000,
+      "color": "#22c55e",
+      "notify": true,
+      "remindDays": 5,
+      "lastContact": "2026-03-22",
+      "steps": [
+        {
+          "id": "s17742618655360",
+          "text": "Reunión inicial — ✓ Realizada",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655361",
+          "text": "Propuesta 4 bodegas Vallejo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655362",
+          "text": "Visita técnica con ingeniero",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655363",
+          "text": "Negociación y condiciones",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655364",
+          "text": "Instalación y cierre de contrato",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 1,
+      "notes": [
+        {
+          "date": "2026-03-22",
+          "text": "Reunión excelente. Tiene presupuesto Q2. Quiere propuesta esta semana."
+        }
+      ],
+      "goals": 120000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c2",
+      "name": "Rodrigo Vega",
+      "role": "Director Comercial, Constructora MX",
+      "sector": "Construcción",
+      "category": "cat1",
+      "activity": "Ventas CCTV institucional",
+      "status": "hot",
+      "money": 85000,
+      "color": "#4f7fff",
+      "notify": true,
+      "remindDays": 7,
+      "lastContact": "2026-03-20",
+      "steps": [
+        {
+          "id": "s17742618655360",
+          "text": "Reunión de presentación Arqos — ✓",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655361",
+          "text": "Cotización torres del Sur",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655362",
+          "text": "Demostración de sistema PTZ",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655363",
+          "text": "Negociación presupuesto",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655364",
+          "text": "Firma contrato + kick-off",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 2,
+      "notes": [
+        {
+          "date": "2026-03-20",
+          "text": "Pidió cotización formal para el edificio Torres del Sur."
+        }
+      ],
+      "goals": 85000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c3",
+      "name": "Ana Martínez",
+      "role": "Gerente de Compras, Hotel Marqués",
+      "sector": "Hospitalidad",
+      "category": "cat2",
+      "activity": "CCTV hotelero + mantenimiento",
+      "status": "warm",
+      "money": 42000,
+      "color": "#06b6d4",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-05",
+      "steps": [
+        {
+          "id": "s17742618655360",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655361",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655362",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655363",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655364",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 1,
+      "notes": [
+        {
+          "date": "2026-03-05",
+          "text": "WhatsApp enviado. Respondió pero sin avanzar en renovación."
+        }
+      ],
+      "goals": 42000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c4",
+      "name": "Carlos Ibáñez",
+      "role": "Emprendedor, Sector Retail",
+      "sector": "Retail",
+      "category": "cat3",
+      "activity": "Referencias y alianzas",
+      "status": "cold",
+      "money": 0,
+      "color": "#ec4899",
+      "notify": false,
+      "remindDays": 30,
+      "lastContact": "2026-02-06",
+      "steps": [
+        {
+          "id": "s17742618655360",
+          "text": "Reconectar — enviar mensaje de valor",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655361",
+          "text": "Café o llamada informal",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655362",
+          "text": "Proponer modelo de referencias",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655363",
+          "text": "Definir comisión o reciprocidad",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655364",
+          "text": "Primera referencia concretada",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": [
+        "Enviar artículo de seguridad retail",
+        "Invitar a evento de networking",
+        "Proponer alianza de referencias mutuas"
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Marco Delgado",
+      "role": "Arquitecto independiente",
+      "sector": "Arquitectura",
+      "category": "cat3",
+      "activity": "Referencias a clientes",
+      "status": "inactive",
+      "money": 0,
+      "color": "#f59e0b",
+      "notify": false,
+      "remindDays": 45,
+      "lastContact": "2026-01-10",
+      "steps": [
+        {
+          "id": "s17742618655360",
+          "text": "Primer contacto / reunión de conocimiento",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655361",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655362",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655363",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742618655364",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 0,
+      "reconnectTips": [
+        "Comentar publicación reciente en LinkedIn",
+        "Enviar caso de éxito residencial",
+        "Proponer co-diseño en nuevos proyectos"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "title": "Llamar Rodrigo — seguimiento cotización",
+      "date": "2026-03-25",
+      "time": "10:00",
+      "contact": "c2",
+      "type": "task"
+    },
+    {
+      "id": "e2",
+      "title": "WhatsApp Ana Martínez — recordar mantenimiento",
+      "date": "2026-03-27",
+      "time": "11:30",
+      "contact": "c3",
+      "type": "msg"
+    },
+    {
+      "id": "e3",
+      "title": "Reunión Sofía Reyes — visita bodegas",
+      "date": "2026-03-24",
+      "time": "09:00",
+      "contact": "c1",
+      "type": "task"
+    }
+  ]
+}
