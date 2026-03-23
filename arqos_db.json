@@ -31,264 +31,152 @@
   ],
   "contacts": [
     {
-      "id": "c1",
-      "name": "Sofía Reyes",
-      "role": "Directora de Operaciones, LogiMex",
-      "sector": "Logística",
-      "category": "cat1",
-      "activity": "Ventas CCTV + control acceso bodegas",
-      "status": "hot",
-      "money": 120000,
-      "color": "#22c55e",
-      "notify": true,
-      "remindDays": 5,
-      "lastContact": "2026-03-22",
-      "steps": [
-        {
-          "id": "s17742618655360",
-          "text": "Reunión inicial — ✓ Realizada",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655361",
-          "text": "Propuesta 4 bodegas Vallejo",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655362",
-          "text": "Visita técnica con ingeniero",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655363",
-          "text": "Negociación y condiciones",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655364",
-          "text": "Instalación y cierre de contrato",
-          "done": false,
-          "doneDate": null
-        }
-      ],
-      "stepProgress": 1,
-      "notes": [
-        {
-          "date": "2026-03-22",
-          "text": "Reunión excelente. Tiene presupuesto Q2. Quiere propuesta esta semana."
-        }
-      ],
-      "goals": 120000,
-      "reconnectTips": []
-    },
-    {
-      "id": "c2",
-      "name": "Rodrigo Vega",
-      "role": "Director Comercial, Constructora MX",
-      "sector": "Construcción",
-      "category": "cat1",
-      "activity": "Ventas CCTV institucional",
-      "status": "hot",
-      "money": 85000,
-      "color": "#4f7fff",
-      "notify": true,
-      "remindDays": 7,
-      "lastContact": "2026-03-20",
-      "steps": [
-        {
-          "id": "s17742618655360",
-          "text": "Reunión de presentación Arqos — ✓",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655361",
-          "text": "Cotización torres del Sur",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655362",
-          "text": "Demostración de sistema PTZ",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655363",
-          "text": "Negociación presupuesto",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655364",
-          "text": "Firma contrato + kick-off",
-          "done": false,
-          "doneDate": null
-        }
-      ],
-      "stepProgress": 2,
-      "notes": [
-        {
-          "date": "2026-03-20",
-          "text": "Pidió cotización formal para el edificio Torres del Sur."
-        }
-      ],
-      "goals": 85000,
-      "reconnectTips": []
-    },
-    {
-      "id": "c3",
-      "name": "Ana Martínez",
-      "role": "Gerente de Compras, Hotel Marqués",
-      "sector": "Hospitalidad",
+      "id": "c1774262383251",
+      "name": "JPablo",
+      "role": "Sr.",
+      "sector": "Sonido",
       "category": "cat2",
-      "activity": "CCTV hotelero + mantenimiento",
-      "status": "warm",
-      "money": 42000,
-      "color": "#06b6d4",
+      "activity": "",
+      "status": "hot",
+      "money": 10000,
+      "color": "rgb(167, 139, 250)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742623832520",
+          "text": "Establecer un interes",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742623832521",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742623832522",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742623832523",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742623832524",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [
+        {
+          "date": "2026-03-23",
+          "text": "Desarrollo de Ondainterna"
+        }
+      ],
+      "goals": 10000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774262436651",
+      "name": "Jose Manuel",
+      "role": "MClub",
+      "sector": "Sonido",
+      "category": "cat1",
+      "activity": "",
+      "status": "new",
+      "money": 30000,
+      "color": "rgb(245, 158, 11)",
       "notify": true,
       "remindDays": 14,
-      "lastContact": "2026-03-05",
+      "lastContact": "2026-03-23",
       "steps": [
         {
-          "id": "s17742618655360",
-          "text": "Primer contacto / reunión de conocimiento",
+          "id": "s17742624366510",
+          "text": "Reunion Presentar Plan de Negocios Arqos",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-23"
+        },
+        {
+          "id": "s17742624366511",
+          "text": "Estrategia 2",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655361",
-          "text": "Presentar propuesta o catálogo",
+          "id": "s17742624366512",
+          "text": "Estrategia 3",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655362",
-          "text": "Seguimiento y ajuste de detalles",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655363",
+          "id": "s17742624366513",
           "text": "Negociación y cierre",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655364",
-          "text": "Entrega / post-venta / referencia",
+          "id": "s17742624366514",
+          "text": "Prestamo de 30,000",
           "done": false,
-          "doneDate": null
+          "doneDate": null,
+          "scheduledDate": "2026-03-28"
         }
       ],
-      "stepProgress": 1,
-      "notes": [
-        {
-          "date": "2026-03-05",
-          "text": "WhatsApp enviado. Respondió pero sin avanzar en renovación."
-        }
-      ],
-      "goals": 42000,
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 30000,
       "reconnectTips": []
     },
     {
-      "id": "c4",
-      "name": "Carlos Ibáñez",
-      "role": "Emprendedor, Sector Retail",
-      "sector": "Retail",
-      "category": "cat3",
-      "activity": "Referencias y alianzas",
-      "status": "cold",
-      "money": 0,
-      "color": "#ec4899",
-      "notify": false,
-      "remindDays": 30,
-      "lastContact": "2026-02-06",
+      "id": "c1774262488193",
+      "name": "Omar B",
+      "role": "",
+      "sector": "Sonido-CCTV-DJ",
+      "category": "cat1",
+      "activity": "Sonido+CCTV+DJ",
+      "status": "new",
+      "money": 15000,
+      "color": "rgb(239, 68, 68)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
       "steps": [
         {
-          "id": "s17742618655360",
-          "text": "Reconectar — enviar mensaje de valor",
+          "id": "s17742624881930",
+          "text": "Convencer a que pague",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655361",
-          "text": "Café o llamada informal",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655362",
-          "text": "Proponer modelo de referencias",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655363",
-          "text": "Definir comisión o reciprocidad",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655364",
-          "text": "Primera referencia concretada",
-          "done": false,
-          "doneDate": null
-        }
-      ],
-      "stepProgress": 0,
-      "notes": [],
-      "goals": 0,
-      "reconnectTips": [
-        "Enviar artículo de seguridad retail",
-        "Invitar a evento de networking",
-        "Proponer alianza de referencias mutuas"
-      ]
-    },
-    {
-      "id": "c5",
-      "name": "Marco Delgado",
-      "role": "Arquitecto independiente",
-      "sector": "Arquitectura",
-      "category": "cat3",
-      "activity": "Referencias a clientes",
-      "status": "inactive",
-      "money": 0,
-      "color": "#f59e0b",
-      "notify": false,
-      "remindDays": 45,
-      "lastContact": "2026-01-10",
-      "steps": [
-        {
-          "id": "s17742618655360",
-          "text": "Primer contacto / reunión de conocimiento",
-          "done": false,
-          "doneDate": null
-        },
-        {
-          "id": "s17742618655361",
+          "id": "s17742624881931",
           "text": "Presentar propuesta o catálogo",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655362",
+          "id": "s17742624881932",
           "text": "Seguimiento y ajuste de detalles",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655363",
+          "id": "s17742624881933",
           "text": "Negociación y cierre",
           "done": false,
           "doneDate": null
         },
         {
-          "id": "s17742618655364",
+          "id": "s17742624881934",
           "text": "Entrega / post-venta / referencia",
           "done": false,
           "doneDate": null
@@ -296,38 +184,476 @@
       ],
       "stepProgress": 0,
       "notes": [],
-      "goals": 0,
-      "reconnectTips": [
-        "Comentar publicación reciente en LinkedIn",
-        "Enviar caso de éxito residencial",
-        "Proponer co-diseño en nuevos proyectos"
-      ]
+      "goals": 15000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774262624305",
+      "name": "Stephanie B",
+      "role": "",
+      "sector": "Novia",
+      "category": "cat1",
+      "activity": "",
+      "status": "new",
+      "money": 100000,
+      "color": "rgb(251, 146, 60)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742626243050",
+          "text": "Convencer de Inversión",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742626243051",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742626243052",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742626243053",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742626243054",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 100000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774264026156",
+      "name": "Alex",
+      "role": "",
+      "sector": "Arqos",
+      "category": "cat2",
+      "activity": "",
+      "status": "new",
+      "money": 14000,
+      "color": "rgb(124, 92, 252)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742640261560",
+          "text": "Ponerle su sistema",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742640261561",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742640261562",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742640261563",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742640261564",
+          "text": "Entrega / post-venta / referencia",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 14000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774264102413",
+      "name": "SantiagoH",
+      "role": "",
+      "sector": "Musica",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 5000,
+      "color": "rgb(52, 211, 153)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742641024140",
+          "text": "Primer Contacto",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641024141",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641024142",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641024143",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641024144",
+          "text": "Tocar en Tonal",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 5000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774264178706",
+      "name": "Booker Kinshasa",
+      "role": "",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 5000,
+      "color": "rgb(245, 158, 11)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742641787060",
+          "text": "Primer Contacto",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641787061",
+          "text": "Presentar propuesta o catálogo",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641787062",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641787063",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742641787064",
+          "text": "Tocar en Abril",
+          "done": false,
+          "doneDate": null
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 5000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774264313038",
+      "name": "Fano",
+      "role": "",
+      "sector": "",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 4000,
+      "color": "rgb(52, 211, 153)",
+      "notify": true,
+      "remindDays": 14,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742643130380",
+          "text": "Fecha apartada",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742643130381",
+          "text": "Segundo Contacto",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742643130382",
+          "text": "Seguimiento y ajuste de detalles",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742643130383",
+          "text": "Negociación y cierre",
+          "done": false,
+          "doneDate": null
+        },
+        {
+          "id": "s17742643130384",
+          "text": "Tocar En Sundance Mayo 30",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-05-30"
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 4000,
+      "reconnectTips": []
+    },
+    {
+      "id": "c1774264613857",
+      "name": "Felix",
+      "role": "",
+      "sector": "Audio",
+      "category": "",
+      "activity": "",
+      "status": "new",
+      "money": 25000,
+      "color": "rgb(52, 211, 153)",
+      "notify": true,
+      "remindDays": 1,
+      "lastContact": "2026-03-23",
+      "steps": [
+        {
+          "id": "s17742646138570",
+          "text": "Confirmar Cita de Mañana",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-30"
+        },
+        {
+          "id": "s17742646138571",
+          "text": "Ir a medir su espacio con micros y software",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
+        },
+        {
+          "id": "s17742646138572",
+          "text": "Presentacion Cotizacion",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-24"
+        },
+        {
+          "id": "s17742646138573",
+          "text": "Pago de Anticipo",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-03-27"
+        },
+        {
+          "id": "s17742646138574",
+          "text": "Comenzar Construcción",
+          "done": false,
+          "doneDate": null,
+          "scheduledDate": "2026-04-04"
+        }
+      ],
+      "stepProgress": 0,
+      "notes": [],
+      "goals": 25000,
+      "reconnectTips": []
     }
   ],
   "events": [
     {
-      "id": "e1",
-      "title": "Llamar Rodrigo — seguimiento cotización",
-      "date": "2026-03-25",
+      "id": "e1774263406674",
+      "title": "[Jose Manuel] Entrega / post-venta / referencia",
+      "date": "2026-03-30",
       "time": "10:00",
-      "contact": "c2",
+      "contact": "c1774262436651",
       "type": "task"
     },
     {
-      "id": "e2",
-      "title": "WhatsApp Ana Martínez — recordar mantenimiento",
-      "date": "2026-03-27",
-      "time": "11:30",
-      "contact": "c3",
-      "type": "msg"
+      "id": "e1774263936715",
+      "title": "[Jose Manuel] Presentar propuesta o catálogo",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
     },
     {
-      "id": "e3",
-      "title": "Reunión Sofía Reyes — visita bodegas",
+      "id": "e1774263941815",
+      "title": "[Jose Manuel] Presentar propuesta o catálogo",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263942832",
+      "title": "[Jose Manuel] Seguimiento y ajuste de detalles",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263945813",
+      "title": "[Jose Manuel] Seguimiento y ajuste de detalles",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263946960",
+      "title": "[Jose Manuel] Negociación y cierre",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263947765",
+      "title": "[Jose Manuel] Entrega / post-venta / referencia",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263951825",
+      "title": "[Jose Manuel] Seguimiento y ajuste de detalles",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263952749",
+      "title": "[Jose Manuel] Negociación y cierre",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "e1774263954759",
+      "title": "[Jose Manuel] Seguimiento y ajuste de detalles",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task"
+    },
+    {
+      "id": "estep1774264327670",
+      "title": "[Fano] Paso 5: Tocar En Sundance Mayo 30",
+      "date": "2026-05-30",
+      "time": "10:00",
+      "contact": "c1774264313038",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265212402",
+      "title": "[Jose Manuel] Paso 1: Reunion",
+      "date": "2026-03-23",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265324368",
+      "title": "[Jose Manuel] Paso 5: Prestamo de 30,000",
+      "date": "2026-03-28",
+      "time": "10:00",
+      "contact": "c1774262436651",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265402819",
+      "title": "[Felix] Paso 1: Confirmar Cita de Mañana",
+      "date": "2026-03-30",
+      "time": "10:00",
+      "contact": "c1774264613857",
+      "type": "task",
+      "stepIdx": 0,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265408255",
+      "title": "[Felix] Paso 2: Ir a medir su espacio con micros y software",
       "date": "2026-03-24",
-      "time": "09:00",
-      "contact": "c1",
-      "type": "task"
+      "time": "10:00",
+      "contact": "c1774264613857",
+      "type": "task",
+      "stepIdx": 1,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265416047",
+      "title": "[Felix] Paso 3: Presentacion Cotizacion",
+      "date": "2026-03-24",
+      "time": "10:00",
+      "contact": "c1774264613857",
+      "type": "task",
+      "stepIdx": 2,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265424352",
+      "title": "[Felix] Paso 4: Pago de Anticipo",
+      "date": "2026-03-27",
+      "time": "10:00",
+      "contact": "c1774264613857",
+      "type": "task",
+      "stepIdx": 3,
+      "isStepSchedule": true
+    },
+    {
+      "id": "estep1774265470238",
+      "title": "[Felix] Paso 5: Comenzar Construcción",
+      "date": "2026-04-04",
+      "time": "10:00",
+      "contact": "c1774264613857",
+      "type": "task",
+      "stepIdx": 4,
+      "isStepSchedule": true
     }
   ]
 }
